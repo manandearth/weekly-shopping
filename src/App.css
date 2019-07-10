@@ -3,24 +3,33 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+    height: 4vmin;
+    display: inline-block;
+    position: relative;
+    
+    bottom: 50%;
+  /* pointer-events: none; */
+}
+
+.App-logo:hover {
+  animation: App-logo-spin infinite 2s linear;
+
 }
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 10vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.App-title {
+    color: orange;
+    padding-left: 2vmin;
 }
 
 @keyframes App-logo-spin {
@@ -31,3 +40,20 @@
     transform: rotate(360deg);
   }
 }
+
+.recipe-title {
+    text-transform: capitalize;
+}
+
+.new-recipe-title {
+    background-color: orange;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.new-recipe {
+    background: cornsilk;
+    width: 30%;
+    overflow: visible;
+    border-radius: 10px;
+}
+
