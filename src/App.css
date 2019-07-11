@@ -32,6 +32,7 @@
     padding-left: 2vmin;
 }
 
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -46,34 +47,68 @@
 }
 
 .new-recipe-title {
+    color: white;
     background-color: orange;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
+
 }
 .new-recipe {
-    background: cornsilk;
+    background: floralwhite;
     width: 300px;
     overflow: visible;
     border-radius: 10px;
 }
 
+.recipe-title {
+    font-size: 2rem; 
+}
+
+.servings {
+    color: grey;
+    /* text-shadow: 2px 2px #aa8888; */
+
+}
+
 .ingredients-form {
+    color: grey;
     display: table-row;
     justify-content: left;
+    background-color: white;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-align: left;
+
+
 }
+
+.button {
+    background-color: lightcyan;
+    margin: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration-line: underline;
+    cursor: pointer;
+    border: none;
+}
+
+.button:hover {
+    background-color: lightskyblue;
+
+}
+
 .ingredients-Qty-input {
     display: table-cell;
     width: 30px;
     ;
 }
 
-.new-ingredients-table, th, td {
+
+.new-ingredients-table {
     width: 100%;
     border: 1px solid black;
     border-collapse: collapse;
     background-color: white;
+   padding: 0.2rem;
 }
 
-th, td {
-    padding: 0.2rem;
-}

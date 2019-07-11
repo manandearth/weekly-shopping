@@ -3,11 +3,13 @@ import { addRecipe } from '../redux/reducers/index.js';
 
 const unitSet = ['Kg', 'gr', 'ml', 'litre', 'teaspoon', 'tablespoon', 'cup', 'lbs', 'Oz' ];
 
-class IngredientsList extends React.Component {
+class IngredientsForm extends React.Component {
 
     constructor(props){
         super(props);
+        this.nextid = 0;  //for the counter to work the let must be defined outside of the handler  
         this.state = {
+            id: 0,
             name: '',
             qty: 0,
             unit: 'kg'};
@@ -23,23 +25,24 @@ class IngredientsList extends React.Component {
     }
 
     handleSubmit(props) {
+        let id = ++this.nextid;
         const name = this.state.name;
         const qty = this.state.qty;
         const unit = this.state.unit;
-        this.props.onSubmitIngredient(name, qty, unit);
+        this.props.onSubmitIngredient(id, name, qty, unit);
     }
     
     render(props) {
         return (
     <div>
-      <div className='ingredients-form'>
-        <div> ingredient:
-          <input className='ingredients-input'
+      <table className='ingredients-form'>
+        <tr> <td>Ingredient:</td>
+          <td><input className='ingredients-input'
                  name='name'
                  onChange={this.handleChange}/>
-        </div>
-        <div> Qty:
-          <input className='ingredients-Qty-input'
+        </td></tr>
+        <tr><td> Qty:</td>
+         <td><input className='ingredients-Qty-input'
                  name='qty'
                  onChange={this.handleChange}/>
          <select
@@ -48,11 +51,14 @@ class IngredientsList extends React.Component {
            onChange={this.handleChange}>
            {unitSet.map((u) => (<option key={'unit-list-item-' + u} >{u}</option>))}
          </select>
-       </div>
-        <input type='submit'
-               onClick={this.handleSubmit}/>
-      </div>
-      <div className='ingredient-list'>{this.props.ingredients}</div>
+         </td>
+        </tr>
+        <tr>
+           <input className='button' type='submit' value='add'
+                  onClick={this.handleSubmit}/>
+         </tr>
+      </table>
+      {/* <div className='ingredient-list'>{this.props.ingredients}</div> */}
     </div>
         );
     }
@@ -74,10 +80,10 @@ export default class NewRecipe extends React.Component {
         };
     }
 
-    handleSubmitIngredient = (name, qty, unit) => 
+    handleSubmitIngredient = (id, name, qty, unit) => 
       
     this.setState(
-        {ingredients: [...this.state.ingredients,{name: name, qty: qty, unit: unit
+        {ingredients: [...this.state.ingredients,{id: id, name: name, qty: qty, unit: unit
         }]});
     
     
@@ -110,15 +116,16 @@ export default class NewRecipe extends React.Component {
         }
     }
 
-        handleServingsBlur = () => 
+    handleServingsBlur = () => 
         this.state.editableServings ?
-            this.setState({editableServings: !this.state.editableServings}) : null;
+        this.setState({editableServings: !this.state.editableServings}) : null;
 
     updateServings = servings => {
         this.setState({ servings });
     }
 
-    
+    handleRemoveIngredient = (id) =>
+        {};
 
     render() {
         return (
@@ -139,7 +146,7 @@ export default class NewRecipe extends React.Component {
                       <span onClick={this.handleTitleClick}
                             className="recipe-title"
                       >{this.state.title === '' ?
-                          'click here to name this recipe':
+                          '<Recipe-Name>':
                           this.state.title}
                       </span>
                     </h2>
@@ -154,9 +161,9 @@ export default class NewRecipe extends React.Component {
                            value={this.state.servings}
                            autoFocus></input>
                     :
-                    <h2 onClick={this.handleServingsClick}> Serves: {this.state.servings}</h2>}
+                    <h2 className='servings' onClick={this.handleServingsClick}> Serves: .... {this.state.servings}</h2>}
               </div>
-              < IngredientsList
+              < IngredientsForm
                 onSubmitIngredient={this.handleSubmitIngredient}
                 /* ingredients={this.state.ingredients} */
               />
@@ -174,6 +181,7 @@ export default class NewRecipe extends React.Component {
                        <td>{ingredient.name}</td>
                        <td>{ingredient.qty}</td>
                        <td>{ingredient.unit}</td>
+                       <td onClick={this.handleRemoveIngredient(ingredient.id)}>remove</td>
                      </tr>
                  
                 ))}
