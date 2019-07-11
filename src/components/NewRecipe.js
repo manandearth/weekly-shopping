@@ -30,7 +30,8 @@ class IngredientsForm extends React.Component {
         const name = this.state.name;
         const qty = this.state.qty;
         const unit = this.state.unit;
-        this.props.onSubmitIngredient(id, name, qty, unit);
+        const editable = null;
+        this.props.onSubmitIngredient(id, name, qty, unit, editable);
     }
     
     render(props) {
@@ -65,13 +66,55 @@ class IngredientsForm extends React.Component {
     }
 }
    
-
+class NewRecipeIngredientsTable extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    
+    render(props) {
+        return(
+            <div>
+             <div> <input className='button'
+                     type='submit'
+                     value='Add ingredient'
+                     onClick={this.props.onAddIngredient}/>
+             </div>
+                  <table className='new-ingredients-table'>
+                  <tr>
+                    <th>ingredient</th>
+                    <th>Qty.</th>
+                    <th>Unit</th>
+                  </tr>
+            {this.props.ingredients.map((ingredient) => (
+                     <tr>
+                       <td id={ingredient.id}
+                           className='name'
+                           onClick={this.props.onTableClick}
+                           
+                           /* onChange={this.props.onTableChange} */
+                        
+                       >{ingredient.name}</td>
+                       <td
+                        
+                       >{ingredient.qty}</td>
+                       <td
+                        
+                       >{ingredient.unit}</td>
+                     </tr>
+                ))}
+            </table>
+        </div>);
+    }
+}
 
 export default class NewRecipe extends React.Component {
 
     constructor (props) {
         super(props);
         this.handleSubmitIngredient = this.handleSubmitIngredient.bind(this);
+        this.handleAddIngredient = this.handleAddIngredient.bind(this);
+        this.handleTableClick = this.handleTableClick.bind(this); 
+        this.nextid = 0;  //for the counter to work the let must be defined outside of the handler  
         this.state = {
             editableTitle: false,
             title: '',
@@ -85,8 +128,12 @@ export default class NewRecipe extends React.Component {
     handleSubmitIngredient = (id, name, qty, unit) => 
     this.setState(
         {ingredients: [
-            ...this.state.ingredients,
-            {id: id, name: name, qty: qty, unit: unit
+            ...this.state.ingredients, {
+                editable: null,
+                id: id,
+                name: name,
+                qty: qty,
+                unit: unit
         }]});
     
     
@@ -125,9 +172,31 @@ export default class NewRecipe extends React.Component {
         this.setState({ servings });
     }
 
-    handleRemoveIngredient = (id) =>
-        {};
+    handleAddIngredient() {
+        let id = ++this.nextid;
+        this.setState({ingredients: [...this.state.ingredients, {id: id, name: 'new ingredient', qty: 1, unit: 'gr', editable: null}]});
+    }
 
+    handleTableClick(event) { 
+        const target = event.target;
+        const className = target.className;
+        let idx = parseInt(target.id);
+        const ingredientToEdit = this.state.ingredients.filter(i => (i.id === idx))[0];
+        let rest = this.state.ingredients.filter(i => (i.id !== idx));
+        Object.assign(ingredientToEdit, {editable: className});
+        this.setState({ingredients: [...rest, ingredientToEdit ]});
+        console.log(ingredientToEdit);
+}
+
+    // handleTableChange(event) {
+    //     const target = event.target;
+    //     const value = target.value;
+    //     const name = target.name;
+    //     this.setState({ingredients: [{[name]: value}]});
+    // }
+
+
+    
     render() {
         return (
             <div className='new-recipe'>
@@ -148,25 +217,14 @@ export default class NewRecipe extends React.Component {
               <IngredientsForm
                 onSubmitIngredient={this.handleSubmitIngredient}/>
 
+              <NewRecipeIngredientsTable
+                onAddIngredient={this.handleAddIngredient}
+                ingredients={this.state.ingredients}
+                onTableChange={this.handleTableChange}
+                onTableClick={this.handleTableClick}
+              />
               <div>
-                <table className='new-ingredients-table'>
-                  <tr>
-                    <th>ingredient</th>
-                    <th>Qty.</th>
-                    <th>Unit</th>
-                  </tr>
-            {this.state.ingredients.map((ingredient) =>
-                (
-                   
-                     <tr className={'ingredient-row--' + ingredient.name}>
-                       <td>{ingredient.name}</td>
-                       <td>{ingredient.qty}</td>
-                       <td>{ingredient.unit}</td>
-                       <td onClick={this.handleRemoveIngredient(ingredient.id)}>remove</td>
-                     </tr>
-                 
-                ))}
-            </table>
+            
               </div>
             </div>
         );

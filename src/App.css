@@ -112,3 +112,6 @@
    padding: 0.2rem;
 }
 
+.name {
+    cursor: pointer;
+}
