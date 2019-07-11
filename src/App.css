@@ -52,8 +52,28 @@
 }
 .new-recipe {
     background: cornsilk;
-    width: 30%;
+    width: 300px;
     overflow: visible;
     border-radius: 10px;
 }
 
+.ingredients-form {
+    display: table-row;
+    justify-content: left;
+}
+.ingredients-Qty-input {
+    display: table-cell;
+    width: 30px;
+    ;
+}
+
+.new-ingredients-table, th, td {
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+th, td {
+    padding: 0.2rem;
+}
