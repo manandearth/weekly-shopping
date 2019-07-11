@@ -1,4 +1,5 @@
 import React from 'react';
+import NewRecipeTopLevel from './NewRecipeTopLevel';
 import { addRecipe } from '../redux/reducers/index.js';
 
 const unitSet = ['Kg', 'gr', 'ml', 'litre', 'teaspoon', 'tablespoon', 'cup', 'lbs', 'Oz' ];
@@ -54,7 +55,7 @@ class IngredientsForm extends React.Component {
          </td>
         </tr>
         <tr>
-           <input className='button' type='submit' value='add'
+           <input className='button' type='submit' value='add ingredient'
                   onClick={this.handleSubmit}/>
          </tr>
       </table>
@@ -63,7 +64,8 @@ class IngredientsForm extends React.Component {
         );
     }
 }
-    
+   
+
 
 export default class NewRecipe extends React.Component {
 
@@ -81,9 +83,10 @@ export default class NewRecipe extends React.Component {
     }
 
     handleSubmitIngredient = (id, name, qty, unit) => 
-      
     this.setState(
-        {ingredients: [...this.state.ingredients,{id: id, name: name, qty: qty, unit: unit
+        {ingredients: [
+            ...this.state.ingredients,
+            {id: id, name: name, qty: qty, unit: unit
         }]});
     
     
@@ -94,8 +97,7 @@ export default class NewRecipe extends React.Component {
         const keyCode = e.keyCode || e.which;
         if (keyCode === 13) {
             this.setState({editableTitle: !this.state.editableTitle});
-        }
-    }
+        }}
 
     handleTitleBlur = () => 
         this.state.editableTitle ?
@@ -104,7 +106,7 @@ export default class NewRecipe extends React.Component {
     updateTitle = title => {
         this.setState({ title });
     }
- v
+ 
     handleServingsClick = () => {
         this.setState({editableServings: !this.state.editableServings});
     }
@@ -113,8 +115,7 @@ export default class NewRecipe extends React.Component {
         const keyCode = e.keyCode || e.which;
         if (keyCode === 13) {
             this.setState({editableServings: !this.state.editableServings});
-        }
-    }
+        }}
 
     handleServingsBlur = () => 
         this.state.editableServings ?
@@ -130,43 +131,23 @@ export default class NewRecipe extends React.Component {
     render() {
         return (
             <div className='new-recipe'>
-              <h2 className='new-recipe-title'>Add a new recipe</h2>
-              {this.state.editableTitle ?
-                  <input
-                    className="rename-list"
-                    onChange={e => this.updateTitle(e.target.value)}
-                    onKeyDown={this.handleTitleEnterKey}
-                    onBlur={this.handleTitleBlur}
-                    value={this.state.title}
-                    autoFocus>
-                  </input>
-                  :
-                  <div>
-                    <h2>
-                      <span onClick={this.handleTitleClick}
-                            className="recipe-title"
-                      >{this.state.title === '' ?
-                          '<Recipe-Name>':
-                          this.state.title}
-                      </span>
-                    </h2>
-                  </div>}
+              <NewRecipeTopLevel
+                editableTitle={this.state.editableTitle}
+                editableServings={this.state.editableServings}
+                title={this.state.title}
+                onTitleClick={this.handleTitleClick}
+                onTitleEnterKey={this.handleTitleEnterKey}
+                onTitleBlur={this.handleTitleBlur}
+                onUpdateTitle={this.updateTitle}
+                servings={this.state.servings}
+                onServingsClick={this.handleServingsClick}
+                onServingsEnterKey={this.handleServingsEnterKey}
+                onServingsBlur={this.handleServingsBlur}
+                onUpdateServings={this.updateServings}/>
 
-              <div 
-                className='servings'>
-                {this.state.editableServings ?
-                    <input onChange={e => this.updateServings(e.target.value)}
-                           onKeyDown={this.handleServingsEnterKey}
-                           onBlur={this.handleServingsBlur}
-                           value={this.state.servings}
-                           autoFocus></input>
-                    :
-                    <h2 className='servings' onClick={this.handleServingsClick}> Serves: .... {this.state.servings}</h2>}
-              </div>
-              < IngredientsForm
-                onSubmitIngredient={this.handleSubmitIngredient}
-                /* ingredients={this.state.ingredients} */
-              />
+              <IngredientsForm
+                onSubmitIngredient={this.handleSubmitIngredient}/>
+
               <div>
                 <table className='new-ingredients-table'>
                   <tr>
