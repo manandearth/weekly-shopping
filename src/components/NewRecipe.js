@@ -72,6 +72,7 @@ class NewRecipeIngredientsTable extends React.Component {
     }
     
     render(props) {
+        const ingredients = this.props.ingredients;
         return(
             <div>
              <div> <input className='button'
@@ -85,23 +86,28 @@ class NewRecipeIngredientsTable extends React.Component {
                     <th>Qty.</th>
                     <th>Unit</th>
                   </tr>
-            {this.props.ingredients.map((ingredient) => (
-                     <tr>
-                       <td id={ingredient.id}
+                    {Object.keys(ingredients).map((k) => (
+                <tr>
+                  {ingredients[k].editable === 'name' ?
+                      <input
+                        id={k}
+                        value={ingredients[k].name}
+                        onChange={this.props.onTableChange}
+                       ></input> :
+                       <td
+                           id={k}
                            className='name'
                            onClick={this.props.onTableClick}
-                           
-                           /* onChange={this.props.onTableChange} */
-                        
-                       >{ingredient.name}</td>
+                       >{ingredients[k].name}</td> }
+                      
                        <td
                         
-                       >{ingredient.qty}</td>
+                       >{ingredients[k].qty}</td>
                        <td
                         
-                       >{ingredient.unit}</td>
+                       >{ingredients[k].unit}</td>
                      </tr>
-                ))}
+                        ))}
             </table>
         </div>);
     }
@@ -113,28 +119,28 @@ export default class NewRecipe extends React.Component {
         super(props);
         this.handleSubmitIngredient = this.handleSubmitIngredient.bind(this);
         this.handleAddIngredient = this.handleAddIngredient.bind(this);
-        this.handleTableClick = this.handleTableClick.bind(this); 
+        this.handleTableClick = this.handleTableClick.bind(this);
+        this.handleTableChange = this.handleTableChange.bind(this);
         this.nextid = 0;  //for the counter to work the let must be defined outside of the handler  
         this.state = {
             editableTitle: false,
             title: '',
             editableServings: false,
             servings: 1,
-            ingredients: [],
+            ingredients: {},
             list: []
         };
     }
 
     handleSubmitIngredient = (id, name, qty, unit) => 
     this.setState(
-        {ingredients: [
-            ...this.state.ingredients, {
+        {ingredients: {
+            ...this.state.ingredients, [id]: {
                 editable: null,
-                id: id,
                 name: name,
                 qty: qty,
                 unit: unit
-        }]});
+            }}});
     
     
     handleTitleClick = () => 
@@ -174,26 +180,30 @@ export default class NewRecipe extends React.Component {
 
     handleAddIngredient() {
         let id = ++this.nextid;
-        this.setState({ingredients: [...this.state.ingredients, {id: id, name: 'new ingredient', qty: 1, unit: 'gr', editable: null}]});
+        this.setState({ingredients: {...this.state.ingredients, [id]: { name: 'new ingredient', qty: 1, unit: 'gr', editable: null}}});
     }
 
-    handleTableClick(event) { 
+    handleTableClick(event) {
+        const  ingredients = this.state.ingredients;
         const target = event.target;
         const className = target.className;
         let idx = parseInt(target.id);
-        const ingredientToEdit = this.state.ingredients.filter(i => (i.id === idx))[0];
-        let rest = this.state.ingredients.filter(i => (i.id !== idx));
-        Object.assign(ingredientToEdit, {editable: className});
-        this.setState({ingredients: [...rest, ingredientToEdit ]});
-        console.log(ingredientToEdit);
+        this.setState({ingredients:
+            {...ingredients, [idx]: {...ingredients[idx] , editable: className}}});
+        console.log({...ingredients[idx], editable: className});
 }
 
-    // handleTableChange(event) {
-    //     const target = event.target;
-    //     const value = target.value;
-    //     const name = target.name;
-    //     this.setState({ingredients: [{[name]: value}]});
-    // }
+    handleTableChange(event) {
+        const target = event.target;
+        const value = target.value; 
+        const idx = parseInt(target.id);
+        const className = target.className;
+        const ingredientToEdit = this.state.ingredients.filter(i =>(i.id === idx))[0];
+        this.setState({ingredients:
+            [...this.state.ingredients,
+            {...ingredientToEdit, [className]: value}]});
+        console.log(idx);
+    }
 
 
     
