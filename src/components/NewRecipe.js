@@ -73,12 +73,15 @@ class NewRecipeIngredientsTable extends React.Component {
     
     render(props) {
         const ingredients = this.props.ingredients;
+        const unitSet = ['Kg', 'gr', 'ml', 'litre', 'teaspoon', 'tablespoon', 'cup', 'lbs', 'Oz' ];
+
         return(
             <div>
              <div> <input className='button'
-                     type='submit'
-                     value='Add ingredient'
-                     onClick={this.props.onAddIngredient}/>
+                          type='submit'
+                          value='Add ingredient'
+                          onClick={this.props.onAddIngredient}
+                          />
              </div>
                   <table className='new-ingredients-table'>
                   <tr>
@@ -90,9 +93,14 @@ class NewRecipeIngredientsTable extends React.Component {
                 <tr>
                   {ingredients[k].editable === 'name' ?
                       <input
+                        className='name'
                         id={k}
                         value={ingredients[k].name}
-                        onChange={this.props.onTableChange}
+                        onChange={e => this.props.onTableChange(e)}
+                        onKeyDown={this.props.onTableEnterKey}
+                        onBlur={this.props.onTableBlur}
+                        onFocus={e => e.target.select()}
+                        autoFocus
                        ></input> :
                        <td
                            id={k}
@@ -100,12 +108,41 @@ class NewRecipeIngredientsTable extends React.Component {
                            onClick={this.props.onTableClick}
                        >{ingredients[k].name}</td> }
                       
+                       <td>
+                         {ingredients[k].editable === 'qty' ?
+                             <input
+                               className='qty'
+                               id={k}
+                               value={ingredients[k].qty}
+                             onChange={e => this.props.onTableChange(e)}
+                        onKeyDown={this.props.onTableEnterKey}
+                               onBlur={this.props.onTableBlur}
+                               onFocus={e => e.target.select()}
+                               autoFocus></input> :
+                             <td
+                               id={k}
+                               className='qty'
+                               onClick={this.props.onTableClick}
+                             >{ingredients[k].qty}</td> }
+                       </td>
                        <td
                         
-                       >{ingredients[k].qty}</td>
-                       <td
-                        
-                       >{ingredients[k].unit}</td>
+                       >{ingredients[k].editable === 'unit' ?
+                           <select
+                             type='list'
+                             name='unit'
+                             className='unit'
+                             id={k}
+                             onChange={this.props.onTableChange}
+                             onBlur={this.props.onTableBlur}>
+                             {unitSet.map((u) => (<option key={'unit-list-item-' + u} >{u}</option>))}
+                           </select>
+                           :
+                             <td
+                               id={k}
+                               className='unit'
+                               onClick={this.props.onTableClick}
+                             >{ingredients[k].unit}</td> }</td>
                      </tr>
                         ))}
             </table>
@@ -121,6 +158,8 @@ export default class NewRecipe extends React.Component {
         this.handleAddIngredient = this.handleAddIngredient.bind(this);
         this.handleTableClick = this.handleTableClick.bind(this);
         this.handleTableChange = this.handleTableChange.bind(this);
+        this.handleTableEnterKey = this.handleTableEnterKey.bind(this);
+        this.handleTableBlur = this.handleTableBlur.bind(this);
         this.nextid = 0;  //for the counter to work the let must be defined outside of the handler  
         this.state = {
             editableTitle: false,
@@ -180,7 +219,7 @@ export default class NewRecipe extends React.Component {
 
     handleAddIngredient() {
         let id = ++this.nextid;
-        this.setState({ingredients: {...this.state.ingredients, [id]: { name: 'new ingredient', qty: 1, unit: 'gr', editable: null}}});
+        this.setState({ingredients: {...this.state.ingredients, [id]: { name: 'new ingredient', qty: 1, unit: 'Kg', editable: null}}});
     }
 
     handleTableClick(event) {
@@ -193,16 +232,36 @@ export default class NewRecipe extends React.Component {
         console.log({...ingredients[idx], editable: className});
 }
 
+    handleTableEnterKey(event) {
+        const  ingredients = this.state.ingredients;
+        const target = event.target;
+        let idx = parseInt(target.id);
+        // const className = event.target.className;
+        // const value = target.value;
+        const keyCode = event.keyCode || event.which;
+        if (keyCode === 13) {
+            this.setState({ingredients:
+                {...ingredients, [idx]: {...ingredients[idx] , editable: null}}});
+        }
+    }
+
+    handleTableBlur(event) {
+        const  ingredients = this.state.ingredients;
+        const target = event.target;
+        let idx = parseInt(target.id);
+            this.setState({ingredients:
+                {...ingredients, [idx]: {...ingredients[idx] , editable: null}}});
+    }
+    
     handleTableChange(event) {
+        const ingredients = this.state.ingredients;
         const target = event.target;
         const value = target.value; 
         const idx = parseInt(target.id);
         const className = target.className;
-        const ingredientToEdit = this.state.ingredients.filter(i =>(i.id === idx))[0];
         this.setState({ingredients:
-            [...this.state.ingredients,
-            {...ingredientToEdit, [className]: value}]});
-        console.log(idx);
+            {...ingredients, [idx]: {...ingredients[idx] , [className]: value}}});
+        console.log(className);
     }
 
 
@@ -224,14 +283,14 @@ export default class NewRecipe extends React.Component {
                 onServingsBlur={this.handleServingsBlur}
                 onUpdateServings={this.updateServings}/>
 
-              <IngredientsForm
-                onSubmitIngredient={this.handleSubmitIngredient}/>
 
               <NewRecipeIngredientsTable
                 onAddIngredient={this.handleAddIngredient}
                 ingredients={this.state.ingredients}
                 onTableChange={this.handleTableChange}
                 onTableClick={this.handleTableClick}
+                onTableEnterKey={this.handleTableEnterKey}
+                onTableBlur={this.handleTableBlur}
               />
               <div>
             

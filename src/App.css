@@ -97,13 +97,6 @@
 
 }
 
-.ingredients-Qty-input {
-    display: table-cell;
-    width: 30px;
-    ;
-}
-
-
 .new-ingredients-table {
     width: 100%;
     border: 1px solid black;
@@ -114,4 +107,8 @@
 
 .name {
     cursor: pointer;
+}
+
+.qty {
+    width: 30px;
 }
