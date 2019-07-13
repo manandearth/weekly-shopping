@@ -26,7 +26,9 @@ class SubmitRecipe extends React.Component {
             <div>
               <button
                 className='button'
-                onClick={this.handleSubmit}>submit</button>
+                /* onClick={this.handleSubmit} */
+                onClick={this.handleSubmit}
+              >submit</button>
             </div>);
     }
 }

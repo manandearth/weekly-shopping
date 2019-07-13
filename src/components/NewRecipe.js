@@ -13,6 +13,7 @@ export default class NewRecipe extends React.Component {
         this.handleTableChange = this.handleTableChange.bind(this);
         this.handleTableEnterKey = this.handleTableEnterKey.bind(this);
         this.handleTableBlur = this.handleTableBlur.bind(this);
+        this.handleSubmitReset = this.handleSubmitReset.bind(this);
         this.nextid = 0;  //for the counter to work the let must be defined outside of the handler  
         this.state = {
             editableTitle: false,
@@ -106,7 +107,14 @@ export default class NewRecipe extends React.Component {
         console.log(className);
     }
 
-
+    handleSubmitReset() {
+        this.setState(
+            {editableTitle: false,
+            title: '',
+            editableServings: false,
+            servings: 1,
+                ingredients: {}});
+    }
     
     render() {
         return (
@@ -138,7 +146,8 @@ export default class NewRecipe extends React.Component {
                 <SubmitRecipe
                   title={this.state.title}
                   servings={this.state.servings}
-                  ingredients={this.state.ingredients}/>
+                  ingredients={this.state.ingredients}
+                  onSubmitReset={this.state.handleSubmitReset}/>
               </div>
             </div>
         );
