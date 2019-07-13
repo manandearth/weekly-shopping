@@ -42,6 +42,14 @@
   }
 }
 
+
+.recipes-panel {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: left; */
+    padding: 3vmin;
+}
+
 .recipe-title {
     text-transform: capitalize;
 }

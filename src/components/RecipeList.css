@@ -1,0 +1,21 @@
+.recipe-list {
+    width: 400px;
+    color: white;
+    background-color: white;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.title {
+    color: white;
+    background-color: orange;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+
+}
+
+.recipe-list-item:hover {
+    background-color: lightskyblue; 
+}
