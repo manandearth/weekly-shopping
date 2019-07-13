@@ -1,160 +1,23 @@
 import React from 'react';
 import NewRecipeTopLevel from './NewRecipeTopLevel';
-import { addRecipe } from '../redux/reducers/index.js';
+import NewRecipeIngredientsTable from './NewRecipeIngredientsTable';
+// import { addRecipe } from '../redux/reducers/index.js';
 
-const unitSet = ['Kg', 'gr', 'ml', 'litre', 'teaspoon', 'tablespoon', 'cup', 'lbs', 'Oz' ];
 
-class IngredientsForm extends React.Component {
-
-    constructor(props){
-        super(props);
-        this.nextid = 0;  //for the counter to work the let must be defined outside of the handler  
-        this.state = {
-            id: 0,
-            name: '',
-            qty: 0,
-            unit: 'kg'};
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    handleChange(event) {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-        this.setState({[name]: value});
-    }
-
-    handleSubmit(props) {
-        let id = ++this.nextid;
-        const name = this.state.name;
-        const qty = this.state.qty;
-        const unit = this.state.unit;
-        const editable = null;
-        this.props.onSubmitIngredient(id, name, qty, unit, editable);
-    }
-    
-    render(props) {
-        return (
-    <div>
-      <table className='ingredients-form'>
-        <tr> <td>Ingredient:</td>
-          <td><input className='ingredients-input'
-                 name='name'
-                 onChange={this.handleChange}/>
-        </td></tr>
-        <tr><td> Qty:</td>
-         <td><input className='ingredients-Qty-input'
-                 name='qty'
-                 onChange={this.handleChange}/>
-         <select
-           type='list'
-           name='unit'
-           onChange={this.handleChange}>
-           {unitSet.map((u) => (<option key={'unit-list-item-' + u} >{u}</option>))}
-         </select>
-         </td>
-        </tr>
-        <tr>
-           <input className='button' type='submit' value='add ingredient'
-                  onClick={this.handleSubmit}/>
-         </tr>
-      </table>
-      {/* <div className='ingredient-list'>{this.props.ingredients}</div> */}
-    </div>
-        );
-    }
-}
-   
-class NewRecipeIngredientsTable extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    
-    render(props) {
-        const ingredients = this.props.ingredients;
-        const unitSet = ['Kg', 'gr', 'ml', 'litre', 'teaspoon', 'tablespoon', 'cup', 'lbs', 'Oz' ];
-
+class SubmitRecipe extends React.Component {
+    render() {
         return(
             <div>
-             <div> <input className='button'
-                          type='submit'
-                          value='Add ingredient'
-                          onClick={this.props.onAddIngredient}
-                          />
-             </div>
-                  <table className='new-ingredients-table'>
-                  <tr>
-                    <th>ingredient</th>
-                    <th>Qty.</th>
-                    <th>Unit</th>
-                  </tr>
-                    {Object.keys(ingredients).map((k) => (
-                <tr>
-                  {ingredients[k].editable === 'name' ?
-                      <input
-                        className='name'
-                        id={k}
-                        value={ingredients[k].name}
-                        onChange={e => this.props.onTableChange(e)}
-                        onKeyDown={this.props.onTableEnterKey}
-                        onBlur={this.props.onTableBlur}
-                        onFocus={e => e.target.select()}
-                        autoFocus
-                       ></input> :
-                       <td
-                           id={k}
-                           className='name'
-                           onClick={this.props.onTableClick}
-                       >{ingredients[k].name}</td> }
-                      
-                       <td>
-                         {ingredients[k].editable === 'qty' ?
-                             <input
-                               className='qty'
-                               id={k}
-                               value={ingredients[k].qty}
-                             onChange={e => this.props.onTableChange(e)}
-                        onKeyDown={this.props.onTableEnterKey}
-                               onBlur={this.props.onTableBlur}
-                               onFocus={e => e.target.select()}
-                               autoFocus></input> :
-                             <td
-                               id={k}
-                               className='qty'
-                               onClick={this.props.onTableClick}
-                             >{ingredients[k].qty}</td> }
-                       </td>
-                       <td
-                        
-                       >{ingredients[k].editable === 'unit' ?
-                           <select
-                             type='list'
-                             name='unit'
-                             className='unit'
-                             id={k}
-                             onChange={this.props.onTableChange}
-                             onBlur={this.props.onTableBlur}>
-                             {unitSet.map((u) => (<option key={'unit-list-item-' + u} >{u}</option>))}
-                           </select>
-                           :
-                             <td
-                               id={k}
-                               className='unit'
-                               onClick={this.props.onTableClick}
-                             >{ingredients[k].unit}</td> }</td>
-                     </tr>
-                        ))}
-            </table>
-        </div>);
+              <input type='submit'></input>
+            </div>);
     }
 }
+
 
 export default class NewRecipe extends React.Component {
 
     constructor (props) {
         super(props);
-        this.handleSubmitIngredient = this.handleSubmitIngredient.bind(this);
         this.handleAddIngredient = this.handleAddIngredient.bind(this);
         this.handleTableClick = this.handleTableClick.bind(this);
         this.handleTableChange = this.handleTableChange.bind(this);
@@ -170,17 +33,6 @@ export default class NewRecipe extends React.Component {
             list: []
         };
     }
-
-    handleSubmitIngredient = (id, name, qty, unit) => 
-    this.setState(
-        {ingredients: {
-            ...this.state.ingredients, [id]: {
-                editable: null,
-                name: name,
-                qty: qty,
-                unit: unit
-            }}});
-    
     
     handleTitleClick = () => 
         this.setState({editableTitle: !this.state.editableTitle});
@@ -293,7 +145,7 @@ export default class NewRecipe extends React.Component {
                 onTableBlur={this.handleTableBlur}
               />
               <div>
-            
+                <SubmitRecipe />
               </div>
             </div>
         );
