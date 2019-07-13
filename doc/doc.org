@@ -1,0 +1,9 @@
+* types:
+
+state already has the qty as string and must be int.
+
+* store:
+
+the recipes added come with editable property is it required?
+
+* TBC
