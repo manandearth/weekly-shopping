@@ -1,20 +1,8 @@
 import React from 'react';
 import NewRecipeTopLevel from './NewRecipeTopLevel';
 import NewRecipeIngredientsTable from './NewRecipeIngredientsTable';
-
+import SubmitRecipe from './SubmitRecipe';
 // import { addRecipe } from '../redux/reducers/index.js';
-
-
-
-class SubmitRecipe extends React.Component {
-    render() {
-        return(
-            <div>
-              <input type='submit'></input>
-            </div>);
-    }
-}
-
 
 export default class NewRecipe extends React.Component {
 
@@ -147,7 +135,10 @@ export default class NewRecipe extends React.Component {
                 onTableBlur={this.handleTableBlur}
               />
               <div>
-                <SubmitRecipe />
+                <SubmitRecipe
+                  title={this.state.title}
+                  servings={this.state.servings}
+                  ingredients={this.state.ingredients}/>
               </div>
             </div>
         );

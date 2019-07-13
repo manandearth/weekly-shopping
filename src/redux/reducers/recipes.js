@@ -54,9 +54,8 @@ export default function(state = initialState, action) {
 		const { recipe , content } = action.payload;
       return {
         ...state,
-          recipes:
-					{...state.recipes,
-							[recipe]: content}
+					...state.recipes,
+					[recipe]: content
       };
       }
 		default: return state;}

@@ -7,7 +7,7 @@ export default class NewRecipeIngredientsTable extends React.Component {
     
     render(props) {
         const ingredients = this.props.ingredients;
-        const unitSet = ['Kg', 'gr', 'ml', 'litre', 'teaspoon', 'tablespoon', 'cup', 'lbs', 'Oz' ];
+        const unitSet = ['kg', 'gr', 'ml', 'litre', 'tsp', 'tbsp', 'cup', 'lbs', 'oz' ];
 
         return(
             <div>
