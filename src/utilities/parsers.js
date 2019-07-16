@@ -6,9 +6,13 @@ export const inputParsers = {
   uppercase(input) {
     return input.toUpperCase();
   },
-  number(input) {
-    return parseFloat(input);
+		integer(input) {
+				return parseInt(input);
   },
+		float(input) {
+				return parseFloat(input);
+		}
 };
+
 
 

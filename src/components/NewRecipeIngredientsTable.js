@@ -23,7 +23,7 @@ export default class NewRecipeIngredientsTable extends React.Component {
                     <th>Unit</th>
                   </tr>
                     {Object.keys(ingredients).map((k) => (
-                <tr>
+                        <tr key={'ingredient-row-' + k}>
                   {ingredients[k].editable === 'name' ?
                       <input
                         className='name'
@@ -47,16 +47,16 @@ export default class NewRecipeIngredientsTable extends React.Component {
                                className='qty'
                                id={k}
                                value={ingredients[k].qty}
-                             onChange={e => this.props.onTableChange(e)}
-                        onKeyDown={this.props.onTableEnterKey}
+                               onChange={e => this.props.onTableChange(e)}
+                               onKeyDown={this.props.onTableEnterKey}
                                onBlur={this.props.onTableBlur}
                                onFocus={e => e.target.select()}
                                autoFocus></input> :
-                             <td
+                             <span
                                id={k}
                                className='qty'
                                onClick={this.props.onTableClick}
-                             >{ingredients[k].qty}</td> }
+                             >{ingredients[k].qty}</span> }
                        </td>
                        <td
                         
@@ -71,11 +71,11 @@ export default class NewRecipeIngredientsTable extends React.Component {
                              {unitSet.map((u) => (<option key={'unit-list-item-' + u} >{u}</option>))}
                            </select>
                            :
-                             <td
+                             <span
                                id={k}
                                className='unit'
                                onClick={this.props.onTableClick}
-                             >{ingredients[k].unit}</td> }</td>
+                             >{ingredients[k].unit}</span> }</td>
                      </tr>
                     ))}
             </tbody>

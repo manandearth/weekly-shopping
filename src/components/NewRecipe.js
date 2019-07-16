@@ -58,7 +58,7 @@ export default class NewRecipe extends React.Component {
         this.setState({editableServings: !this.state.editableServings}) : null;
 
     updateServings = servings => {
-        this.setState({ servings: inputParsers.number(servings) });
+        this.setState({ servings: inputParsers.integer(servings) });
     }
 
     handleAddIngredient() {
