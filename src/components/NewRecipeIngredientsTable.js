@@ -1,13 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class NewRecipeIngredientsTable extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    
+
     render(props) {
         const ingredients = this.props.ingredients;
-        const unitSet = ['kg', 'gr', 'ml', 'litre', 'tsp', 'tbsp', 'cup', 'lbs', 'oz' ];
+        const unitSet = ['kg', 'gr', 'ml', 'litre', 'tsp', 'tbsp', 'cup', 'lbs', 'oz', 'units' ];
 
         return(
             <div>
@@ -18,7 +16,8 @@ export default class NewRecipeIngredientsTable extends React.Component {
                           />
              </div>
                   <table className='new-ingredients-table'>
-                  <tr>
+<tbody>
+                    <tr>
                     <th>ingredient</th>
                     <th>Qty.</th>
                     <th>Unit</th>
@@ -79,7 +78,15 @@ export default class NewRecipeIngredientsTable extends React.Component {
                              >{ingredients[k].unit}</td> }</td>
                      </tr>
                     ))}
+            </tbody>
                   </table>
         </div>);
     }
 }
+
+NewRecipeIngredientsTable.propTypes = {
+    qty: PropTypes.number,
+    unit: PropTypes.string,
+    name: PropTypes.string
+ 
+};

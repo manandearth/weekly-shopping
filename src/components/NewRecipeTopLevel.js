@@ -1,4 +1,5 @@
 import React from 'react'  ;
+import PropTypes from 'prop-types';
 
 export default class NewRecipeTopLevel extends React.Component {
     render() {
@@ -34,6 +35,7 @@ export default class NewRecipeTopLevel extends React.Component {
                            onKeyDown={this.props.onServingsEnterKey}
                            onBlur={this.props.onServingsBlur}
                            value={this.props.servings}
+                           type="number"
                            onFocus={e => e.target.select()}
                            autoFocus></input>
                     :
@@ -42,3 +44,8 @@ export default class NewRecipeTopLevel extends React.Component {
             </div>);
     }
 }
+
+NewRecipeTopLevel.propTypes = {
+    servings: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired
+};

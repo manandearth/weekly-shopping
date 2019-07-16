@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getTodosState } from '../redux/selectors';
 import { addRecipe } from '../redux/actions.js';
 class SubmitRecipe extends React.Component {
 

@@ -3,7 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import NewRecipe from './components/NewRecipe';
 import RecipeList from './components/RecipeList';
-
+import EditRecipe from './components/EditRecipe';
+import propTypes from 'prop-types';
 function ColorBtn() {
     return (
 <button>cook</button>
@@ -20,8 +21,9 @@ function App() {
         <h2 className='App-title'>Weekly shopping</h2>
       </header>
       <div className='recipes-panel'>
-      <NewRecipe />
-      <RecipeList />
+        <NewRecipe />
+        <RecipeList />
+        <EditRecipe />
       </div>
     </div>
       

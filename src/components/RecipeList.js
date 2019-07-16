@@ -10,7 +10,7 @@ class RecipeList extends React.Component {
               <h2 className='title'>The recipes</h2>
               <div className='recipe-list-block'>
               {Object.keys(this.props.recipes).map((id) =>
-                <button className='button'>{id}</button>)}  
+                  <button className='button' key={'recipe-' + id}>{id}</button>)}  
               </div>
             </div>
         );

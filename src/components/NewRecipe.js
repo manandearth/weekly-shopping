@@ -2,6 +2,7 @@ import React from 'react';
 import NewRecipeTopLevel from './NewRecipeTopLevel';
 import NewRecipeIngredientsTable from './NewRecipeIngredientsTable';
 import SubmitRecipe from './SubmitRecipe';
+import { inputParsers }  from '../utilities/parsers';
 // import { addRecipe } from '../redux/reducers/index.js';
 
 export default class NewRecipe extends React.Component {
@@ -57,7 +58,7 @@ export default class NewRecipe extends React.Component {
         this.setState({editableServings: !this.state.editableServings}) : null;
 
     updateServings = servings => {
-        this.setState({ servings });
+        this.setState({ servings: inputParsers.number(servings) });
     }
 
     handleAddIngredient() {
