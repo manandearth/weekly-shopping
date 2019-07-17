@@ -96,16 +96,25 @@ export default class NewRecipe extends React.Component {
     this.setState({ingredients:
       {...ingredients, [idx]: {...ingredients[idx] , editable: null}}});
   }
-
+	
   handleTableChange(event) {
     const target = event.target;
     const value = target.value;
     const idx = parseInt(target.id);
     const ingredients = this.state.ingredients;
     const className = target.className;
-    this.setState({ingredients:
+		switch (className) {
+			case 'qty':
+		this.setState({ingredients:
+      {...ingredients, [idx]: {...ingredients[idx] ,
+        [className]: inputParsers.float(value) }}});
+				break;
+			default:
+				this.setState({ingredients:
       {...ingredients, [idx]: {...ingredients[idx] ,
         [className]: value }}});
+
+		}
     console.log(className);
   }
 
