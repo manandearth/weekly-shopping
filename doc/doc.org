@@ -9,4 +9,14 @@ the recipes added come with editable property is it required?
 
 * TODO reset on submit recipe 
 Look at onSubmitReset - still is'nt working.
-* TBC
+
+
+* Validating PropTypes, yet catching errors? and coerssion?
+
+** for coercing 
+
+I am trying this with a parsing namespace under `/utilities`
+
+** errors
+One idea is a wrapper handler that catches any error and renders some component/error message
+

@@ -6,9 +6,9 @@ import RecipeList from './components/RecipeList';
 import EditRecipe from './components/EditRecipe';
 import propTypes from 'prop-types';
 function ColorBtn() {
-    return (
-<button>cook</button>
-    );
+  return (
+    <button>cook</button>
+  );
 
 } ;
 
@@ -26,7 +26,7 @@ function App() {
         <EditRecipe />
       </div>
     </div>
-      
+    
   );
 }
 
