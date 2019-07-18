@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addRecipe } from '../redux/actions.js';
+import _ from 'lodash';
 
 class SubmitRecipe extends React.Component {
   
@@ -8,15 +9,15 @@ class SubmitRecipe extends React.Component {
     const title = this.props.title;
     const servings = this.props.servings;
     const ingredients = this.props.ingredients;
-    const entries = Object.entries(ingredients);
-    const values = Object.values(ingredients);
+    const _entries = _.entries(ingredients);
+    const _values = _.values(ingredients); 
     //check that title has a value
     if (title === '')
     { alert('Please supply a recipe name'); }
     //check that ingredient object is not empty and `name` property was given a value.
-    else if ( values.filter((v) => (v.name === 'new ingredient')).length > 0) {
+    else if ( _values.filter((v) => (v.name === 'new ingredient')).length > 0) {
       alert ( 'Please supply an ingredient name' );
-    } else if ( entries.length === 0 && ingredients.constructor === Object){
+    } else if ( _entries.length === 0 && ingredients.constructor === Object){
       alert ( 'Please supply ingredients');
     } else {
       this.props.addRecipe(
@@ -24,7 +25,6 @@ class SubmitRecipe extends React.Component {
           title: title,
           servings: servings,
           ingredients: ingredients});
-      console.log(title);
       this.props.onSubmitReset();
     }
   }
