@@ -14,6 +14,7 @@ class SubmitRecipe extends React.Component {
         servings: servings,
         ingredients: ingredients});
     console.log(title);
+    this.props.onSubmitReset();
   }
 
   render() {
@@ -23,7 +24,6 @@ class SubmitRecipe extends React.Component {
           className='button'
       /* onClick={this.handleSubmit} */
           onClick={this.handleSubmit}
-          /* onClick={this.props.onSubmitReset} */
         >submit</button>
       </div>);
   }
