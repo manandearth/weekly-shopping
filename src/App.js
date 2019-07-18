@@ -4,7 +4,6 @@ import './App.css';
 import NewRecipe from './components/NewRecipe';
 import RecipeList from './components/RecipeList';
 import EditRecipe from './components/EditRecipe';
-import propTypes from 'prop-types';
 function ColorBtn() {
   return (
     <button>cook</button>

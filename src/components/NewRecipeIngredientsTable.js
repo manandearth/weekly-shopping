@@ -25,7 +25,7 @@ export default class NewRecipeIngredientsTable extends React.Component {
             {Object.keys(ingredients).map((k) => (
               <tr key={'ingredient-row-' + k}>
                 {ingredients[k].editable === 'name' ?
-                  <input
+                  <td><input
                     className='name'
                     id={k}
                     value={ingredients[k].name}
@@ -34,7 +34,7 @@ export default class NewRecipeIngredientsTable extends React.Component {
                     onBlur={this.props.onTableBlur}
                     onFocus={e => e.target.select()}
                     autoFocus
-                  ></input> :
+                  ></input></td> :
                   <td
                     id={k}
                     className='name'

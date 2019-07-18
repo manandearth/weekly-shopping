@@ -67,7 +67,7 @@ export default class NewRecipe extends React.Component {
   }
 
   handleTableClick(event) {
-    const  ingredients = this.state.ingredients;
+    const ingredients = this.state.ingredients;
     const target = event.target;
     const className = target.className;
     let idx = parseInt(target.id);
@@ -105,27 +105,25 @@ export default class NewRecipe extends React.Component {
     const className = target.className;
 		switch (className) {
 			case 'qty':
-		this.setState({ingredients:
-      {...ingredients, [idx]: {...ingredients[idx] ,
-        [className]: inputParsers.float(value) }}});
+		    this.setState({ingredients:
+          {...ingredients, [idx]: {...ingredients[idx] ,
+            [className]: inputParsers.float(value) }}});
 				break;
 			default:
 				this.setState({ingredients:
-      {...ingredients, [idx]: {...ingredients[idx] ,
-        [className]: value }}});
-
+          {...ingredients, [idx]: {...ingredients[idx] ,
+            [className]: value }}});
 		}
-    console.log(className);
   }
 
-  handleSubmitReset() {
+  handleSubmitReset = () =>
     this.setState(
       {editableTitle: false,
         title: '',
         editableServings: false,
         servings: 1,
         ingredients: {}});
-  }
+  
   
   render() {
     return (
@@ -159,6 +157,7 @@ export default class NewRecipe extends React.Component {
             servings={this.state.servings}
             ingredients={this.state.ingredients}
             onSubmitReset={this.state.handleSubmitReset}/>
+				  
         </div>
       </div>
     );

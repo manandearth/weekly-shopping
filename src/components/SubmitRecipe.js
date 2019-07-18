@@ -1,14 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addRecipe } from '../redux/actions.js';
-class SubmitRecipe extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+class SubmitRecipe extends React.Component {
   
-  handleSubmit(props) {
+  handleSubmit = (props) => {
     const title = this.props.title;
     const servings = this.props.servings;
     const ingredients = this.props.ingredients;
@@ -27,6 +23,7 @@ class SubmitRecipe extends React.Component {
           className='button'
       /* onClick={this.handleSubmit} */
           onClick={this.handleSubmit}
+          /* onClick={this.props.onSubmitReset} */
         >submit</button>
       </div>);
   }

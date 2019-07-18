@@ -8,8 +8,8 @@ the recipes added come with editable property is it required?
 
 
 * TODO reset on submit recipe 
-Look at onSubmitReset - still is'nt working.
-
+Look at onSubmitReset - still isn't working.
+running two handles on that listener.
 
 * Validating PropTypes, yet catching errors? and coerssion?
 
