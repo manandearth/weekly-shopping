@@ -8,15 +8,17 @@ class SubmitRecipe extends React.Component {
     const title = this.props.title;
     const servings = this.props.servings;
     const ingredients = this.props.ingredients;
+    const entries = Object.entries(ingredients);
+    const values = Object.values(ingredients);
     //check that title has a value
     if (title === '')
     { alert('Please supply a recipe name'); }
     //check that ingredient object is not empty and `name` property was given a value.
-    else if ( Object.values(ingredients).filter((v) => (v.name === 'new ingredient')).length > 0 || (Object.entries(ingredients).length === 0 && ingredients.constructor === Object))
-
-    { alert ( 'Please supply an ingredient name' );
-    } else 
-    {
+    else if ( values.filter((v) => (v.name === 'new ingredient')).length > 0) {
+      alert ( 'Please supply an ingredient name' );
+    } else if ( entries.length === 0 && ingredients.constructor === Object){
+      alert ( 'Please supply ingredients');
+    } else {
       this.props.addRecipe(
         title, {
           title: title,
