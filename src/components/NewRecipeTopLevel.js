@@ -5,6 +5,7 @@ export default class NewRecipeTopLevel extends React.Component {
   render() {
     return(
       <div className='new-recipe'>
+        <form>
         <h2 className='new-recipe-title'>Add a new recipe</h2>
         {this.props.editableTitle ?
           <input
@@ -14,7 +15,8 @@ export default class NewRecipeTopLevel extends React.Component {
             onBlur={this.props.onTitleBlur}
             value={this.props.title}
             onFocus={e => e.target.select()}
-            autoFocus>
+            autoFocus
+            required>
           </input>
           :
           <div>
@@ -42,7 +44,8 @@ export default class NewRecipeTopLevel extends React.Component {
                    autoFocus></input>
             :
             <h2 className='servings' onClick={this.props.onServingsClick}> Serves: .... {this.props.servings}</h2>}
-        </div>
+      </div>
+      </form>
       </div>);
   }
 }
