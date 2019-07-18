@@ -9,12 +9,6 @@ export default class NewRecipe extends React.Component {
 
   constructor (props) {
     super(props);
-    this.handleAddIngredient = this.handleAddIngredient.bind(this);
-    this.handleTableClick = this.handleTableClick.bind(this);
-    this.handleTableChange = this.handleTableChange.bind(this);
-    this.handleTableEnterKey = this.handleTableEnterKey.bind(this);
-    this.handleTableBlur = this.handleTableBlur.bind(this);
-    this.handleSubmitReset = this.handleSubmitReset.bind(this);
     this.nextid = 0;  //for the counter to work the let must be defined outside of the handler  
     this.state = {
       editableTitle: false,
@@ -61,12 +55,12 @@ export default class NewRecipe extends React.Component {
     this.setState({ servings: inputParsers.integer(servings) });
   }
 
-  handleAddIngredient() {
+  handleAddIngredient = () => {
     let id = ++this.nextid;
     this.setState({ingredients: {...this.state.ingredients, [id]: { name: 'new ingredient', qty: 1, unit: 'Kg', editable: null}}});
   }
 
-  handleTableClick(event) {
+  handleTableClick  = (event) => {
     const ingredients = this.state.ingredients;
     const target = event.target;
     const className = target.className;
@@ -76,12 +70,10 @@ export default class NewRecipe extends React.Component {
     console.log({...ingredients[idx], editable: className});
 	}
 
-  handleTableEnterKey(event) {
+  handleTableEnterKey = (event) => {
     const  ingredients = this.state.ingredients;
     const target = event.target;
     let idx = parseInt(target.id);
-    // const className = event.target.className;
-    // const value = target.value;
     const keyCode = event.keyCode || event.which;
     if (keyCode === 13) {
       this.setState({ingredients:
@@ -89,7 +81,7 @@ export default class NewRecipe extends React.Component {
     }
   }
 
-  handleTableBlur(event) {
+  handleTableBlur = (event) => {
     const  ingredients = this.state.ingredients;
     const target = event.target;
     let idx = parseInt(target.id);
@@ -97,7 +89,7 @@ export default class NewRecipe extends React.Component {
       {...ingredients, [idx]: {...ingredients[idx] , editable: null}}});
   }
 	
-  handleTableChange(event) {
+  handleTableChange = (event) => {
     const target = event.target;
     const value = target.value;
     const idx = parseInt(target.id);
