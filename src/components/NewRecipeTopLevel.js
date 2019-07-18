@@ -35,7 +35,9 @@ export default class NewRecipeTopLevel extends React.Component {
                    onKeyDown={this.props.onServingsEnterKey}
                    onBlur={this.props.onServingsBlur}
                    value={this.props.servings}
-                   type="number"
+                   type='number'
+                   min='1'
+                   step='1'
                    onFocus={e => e.target.select()}
                    autoFocus></input>
             :

@@ -46,12 +46,15 @@ export default class NewRecipeIngredientsTable extends React.Component {
                     <input
                       className='qty'
                       id={k}
+                      type='number'
+                      min='0'
                       value={ingredients[k].qty}
                       onChange={e => this.props.onTableChange(e)}
                       onKeyDown={this.props.onTableEnterKey}
                       onBlur={this.props.onTableBlur}
                       onFocus={e => e.target.select()}
-                      autoFocus></input> :
+                      autoFocus
+                      required></input> :
                     <span
                       id={k}
                       className='qty'
