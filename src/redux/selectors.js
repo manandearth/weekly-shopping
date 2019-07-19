@@ -15,4 +15,3 @@ export const getRecipes = store =>
 
 
 export const getRecipesState = store => store.recipes;
-

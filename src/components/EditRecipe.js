@@ -1,12 +1,30 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import _ from  'lodash';
+import RecipeTopLevel from './RecipeTopLevel.js';
 
-export default class EditRecipe extends React.Component {
+class EditRecipe extends React.Component {
 
 	render() {
 		return (
         <div className='edit-recipe'>
-        <h2 className='title'>Edit recipe</h2>
+         
+          <RecipeTopLevel
+            topBar={'Edit recipe'}/>
         </div>
     );
 	}
 }
+
+//REACT-REDUX
+
+function mapStateToProps(state) {
+  return {
+    recipes: state.recipes
+  };
+}
+
+export default connect(mapStateToProps)(EditRecipe);
+
+
+

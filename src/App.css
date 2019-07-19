@@ -54,7 +54,7 @@
     text-transform: capitalize;
 }
 
-.new-recipe-title {
+.top-bar {
     color: white;
     background-color: orange;
     border-top-right-radius: 10px;

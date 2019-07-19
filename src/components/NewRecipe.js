@@ -1,5 +1,5 @@
 import React from 'react';
-import NewRecipeTopLevel from './NewRecipeTopLevel';
+import RecipeTopLevel from './RecipeTopLevel';
 import NewRecipeIngredientsTable from './NewRecipeIngredientsTable';
 import SubmitRecipe from './SubmitRecipe';
 import { inputParsers }  from '../utilities/parsers';
@@ -121,7 +121,8 @@ export default class NewRecipe extends React.Component {
   render() {
     return (
       <div className='new-recipe'>
-        <NewRecipeTopLevel
+        <RecipeTopLevel
+          topBar={'Add new recipe'}
           editableTitle={this.state.editableTitle}
           editableServings={this.state.editableServings}
           title={this.state.title}
