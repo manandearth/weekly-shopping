@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import _ from  'lodash';
 import RecipeTopLevel from './RecipeTopLevel.js';
+import { getSelectedRecipe } from '../redux/selectors';
 
 class EditRecipe extends React.Component {
 
@@ -10,17 +11,20 @@ class EditRecipe extends React.Component {
         <div className='edit-recipe'>
          
           <RecipeTopLevel
-            topBar={'Edit recipe'}/>
+            topBar={'Edit recipe'}
+            title={toString(this.props.recipes)}
+          />
         </div>
-    );
-	}
+      );
+	
 }
-
+}
 //REACT-REDUX
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return {
-    recipes: state.recipes
+    recipes: state.recipes,
+    selectedRecipe: getSelectedRecipe
   };
 }
 
