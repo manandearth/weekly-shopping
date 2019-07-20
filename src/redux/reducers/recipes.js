@@ -5,7 +5,7 @@ const initialState = {
 		'rice pudding': {
 				title: 'rice pudding',
 				servings: 2,
-				ingredientes: {
+				ingredients: {
 						1: {
 								name: 'rice',
 								qty: 50,
@@ -28,7 +28,7 @@ const initialState = {
 		'mash potatoes': {
 				title: 'mash potatoes',
 				servings: 5,
-				ingredientes: {
+				ingredients: {
 						1: {
 								name: 'potatoes',
 								qty: 1,

@@ -92,7 +92,7 @@ export default class NewRecipe extends React.Component {
   }
 	
   handleTableChange = (event) => {
-    
+
     const target = event.target;
     const value = target.value;
     const idx = parseInt(target.id);

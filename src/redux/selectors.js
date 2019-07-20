@@ -16,6 +16,16 @@ export const getSelectedFromRecipes = store => {
 export const getSelectedServings = store => {
 	const selectedRecipe = getSelectedFromRecipes(store);
 	return( 
-	store.selections.selectedRecipe.recipe && store.recipes ?
-		_.values(getSelectedFromRecipes(store))[0].servings :
+		store.selections.selectedRecipe.recipe && store.recipes ?
+			_.values(getSelectedFromRecipes(store))[0].servings :
 			'' );};
+
+
+export const getSelectedIngredients = store => {
+	const selectedRecipe = getSelectedFromRecipes(store);
+	return (
+		store.selections.selectedRecipe.recipe && store.recipes ?
+			_.values(getSelectedFromRecipes(store))[0].ingredients :
+			{}
+	);
+};
