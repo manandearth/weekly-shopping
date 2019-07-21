@@ -1,4 +1,5 @@
-import { ADD_RECIPE } from "../actionTypes";
+import _ from 'lodash';
+import { ADD_RECIPE, TOGGLE_TITLE } from "../actionTypes";
 
 const initialState = {
 	
@@ -62,5 +63,16 @@ export default function(state = initialState, action) {
 				[recipe]: content
       };
     }
+		case TOGGLE_TITLE: {
+			const { title } = action.payload;
+			return {
+				...state,
+				[title]: {...state[title],
+					editableTitle: !state[title].editableTitle 
+				}	
+			};
+		}
+	
+		
 		default: return state;}
 }
