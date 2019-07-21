@@ -4,7 +4,7 @@ import _ from  'lodash';
 import RecipeTopLevel from './RecipeTopLevel.js';
 import RecipeIngredientsTable from './RecipeIngredientsTable';
 import { toggleTitle, toggleServings } from '../redux/actions';
-import { getSelectedRecipe, getSelectedServings, getSelectedIngredients } from '../redux/selectors';
+import { getSelectedRecipe, getSelectedServings, getSelectedIngredients, getSelectedEditableServings, getSelectedEditableTitle  } from '../redux/selectors';
 
 class EditRecipe extends React.Component {
 
@@ -18,6 +18,9 @@ class EditRecipe extends React.Component {
           <RecipeTopLevel
             topBar={'Edit recipe'}
             title={this.props.recipe}
+            editableTitle={this.props.editableTitle}
+            editableServings={this.props.editableServings}
+            servings={this.props.servings}
             onTitleClick={this.handleTitleClick}
             onServingsClick={() =>  this.props.toggleServings(this.props.recipe, this.props.servings)}
             servings={this.props.servings}
@@ -55,11 +58,16 @@ const mapStateToProps = state => {
   const recipe = getSelectedRecipe(state);
   const servings = getSelectedServings(state);
   const ingredients = getSelectedIngredients(state);
+  const editableTitle = getSelectedEditableTitle(state);
+  const editableServings = getSelectedEditableServings(state);
   // const ingredients = {1:{name: 'foo', unit: 'kg', qty: 99}};
   return {
     recipe,
     servings,
-    ingredients
+    ingredients,
+    editableTitle,
+    editableServings
+    
   };
 };
 
