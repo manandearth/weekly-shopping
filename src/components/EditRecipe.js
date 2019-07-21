@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import _ from  'lodash';
 import RecipeTopLevel from './RecipeTopLevel.js';
 import RecipeIngredientsTable from './RecipeIngredientsTable';
+
 import { getSelectedRecipe, getSelectedServings, getSelectedIngredients } from '../redux/selectors';
 
 class EditRecipe extends React.Component {
@@ -29,7 +30,7 @@ class EditRecipeIngredientsTable extends React.Component {
     return(
       <div>
         <RecipeIngredientsTable
-          /* onAddIngredient={this.props.onAddIngredient} */
+          onAddIngredient={this.props.onAddIngredient}
           ingredients={this.props.ingredients}
           /* onTableChange={this.props.onTableChange} */
           /* onTableClick={this.props.onTableClick} */

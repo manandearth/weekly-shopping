@@ -23,7 +23,9 @@ class SubmitRecipe extends React.Component {
       this.props.addRecipe(
         title, {
           title: title,
+          editableTitle: false,
           servings: servings,
+          editableServings: false,
           ingredients: ingredients});
       this.props.onSubmitReset();
     }
