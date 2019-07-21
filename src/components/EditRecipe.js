@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import _ from  'lodash';
 import RecipeTopLevel from './RecipeTopLevel.js';
 import RecipeIngredientsTable from './RecipeIngredientsTable';
-import { toggleTitle } from '../redux/actions';
+import { toggleTitle, toggleServings } from '../redux/actions';
 import { getSelectedRecipe, getSelectedServings, getSelectedIngredients } from '../redux/selectors';
 
 class EditRecipe extends React.Component {
@@ -19,6 +19,7 @@ class EditRecipe extends React.Component {
             topBar={'Edit recipe'}
             title={this.props.recipe}
             onTitleClick={this.handleTitleClick}
+            onServingsClick={() =>  this.props.toggleServings(this.props.recipe, this.props.servings)}
             servings={this.props.servings}
           />
           <EditRecipeIngredientsTable
@@ -62,7 +63,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { toggleTitle })(EditRecipe);
+export default connect(mapStateToProps, { toggleTitle, toggleServings })(EditRecipe);
 
 
 

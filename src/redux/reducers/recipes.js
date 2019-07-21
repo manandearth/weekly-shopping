@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { ADD_RECIPE, TOGGLE_TITLE } from "../actionTypes";
+import { ADD_RECIPE, TOGGLE_TITLE, TOGGLE_SERVINGS } from "../actionTypes";
 
 const initialState = {
 	
@@ -69,6 +69,15 @@ export default function(state = initialState, action) {
 				...state,
 				[title]: {...state[title],
 					editableTitle: !state[title].editableTitle 
+				}	
+			};
+		}
+		case TOGGLE_SERVINGS: {
+			const { title, servings } = action.payload;
+			return {
+				...state,
+				[title]: {...state[title],
+					editableServings: !state[title].editableServings 
 				}	
 			};
 		}
