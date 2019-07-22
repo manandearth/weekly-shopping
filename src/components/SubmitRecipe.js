@@ -28,9 +28,9 @@ class SubmitRecipe extends React.Component {
           editableServings: false,
           ingredients: ingredients});
       this.props.onSubmitReset();
-    }
+    };
   }
-  
+
   render() {
     return(
       <div>

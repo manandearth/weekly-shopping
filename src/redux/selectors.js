@@ -44,4 +44,9 @@ export const getSelectedEditableTitle = store => {
 			_.values(getSelectedFromRecipes(store))[0].editableTitle :
 			'' );};
 
-
+export const getSelectedToEdit = store => {
+	const selectedRecipe = getSelectedFromRecipes(store);
+	return (
+		store.selections.selectedRecipe.recipe && store.recipes ?
+			_.values(getSelectedFromRecipes(store))[0] : {}
+	);};

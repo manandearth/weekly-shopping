@@ -69,7 +69,6 @@ export default class NewRecipe extends React.Component {
     let idx = parseInt(target.id);
     this.setState({ingredients:
       {...ingredients, [idx]: {...ingredients[idx] , editable: className}}});
-    console.log({...ingredients[idx], editable: className});
 	}
 
   handleTableEnterKey = (event) => {

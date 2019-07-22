@@ -2,11 +2,15 @@ import React from 'react';
 import './RecipeList.css';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { selectRecipe } from '../redux/actions';
-
+import { editRecipe, selectRecipe } from '../redux/actions';
+import { getSelectedToEdit } from '../redux/selectors';
 class  RecipeList extends React.Component {
 
-  handleClick = (recipe) => this.props.selectRecipe(recipe);
+  handleClick = (recipe) => {
+    setTimeout(() => {
+    this.props.selectRecipe(recipe);
+      this.props.editRecipe(this.props.selected);}, 1000);
+  }
   
   render (){
     const recipes = this.props.recipes;
@@ -31,8 +35,9 @@ class  RecipeList extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    recipes: state.recipes
+    recipes: state.recipes,
+    selected: getSelectedToEdit(state)
   };
 }
 
-export default connect(mapStateToProps, { selectRecipe })(RecipeList);
+export default connect(mapStateToProps, { editRecipe, selectRecipe })(RecipeList);
