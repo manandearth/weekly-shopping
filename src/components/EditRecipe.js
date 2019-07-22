@@ -15,10 +15,10 @@ class EditRecipe extends React.Component {
   }
 
 
-  handleGetIngredients = () => 
-    this.props.edited.ingredients ?
-    {1: {name: 's', qty: 8, unit: 'kg'}} :
-  {1: {name: 't', qty: 5, unit: 'litre'}};
+  handleGetIngredients = ( ingredients ) =>
+    ingredients ?
+    ingredients  :
+  {};
   
   handleTitleClick = (e) =>
     e.target.innerHTML !== editRecipeTitlePH ?
@@ -49,11 +49,12 @@ class EditRecipe extends React.Component {
             editableServings={this.props.edited.editableServings}
             servings={this.props.edited.servings}
             onTitleClick={this.handleTitleClick}
-            onUpdateTitle={this.handleUpdateTitle}
+            onUpdateTitle={() => this.handleUpdateTitle}
             onServingsClick={() => this.handleServingsClick(this.props.recipe, this.props.servings)}
           />
           <EditRecipeIngredientsTable
-            ingredients={this.handleGetIngredients}
+            key={'ingredients-' + this.props.edited.title}
+            onIngredients={this.handleGetIngredients(this.props.edited.ingredients)}
               /* {this.handleGetIngredients} */
           />
         </div>
@@ -69,7 +70,7 @@ class EditRecipeIngredientsTable extends React.Component {
       <div>
         <RecipeIngredientsTable
           onAddIngredient={this.props.onAddIngredient}
-          ingredients={this.props.ingredients}
+          ingredients={this.props.onIngredients}
           /* onTableChange={this.props.onTableChange} */
           /* onTableClick={this.props.onTableClick} */
           /* onTableEnterKey={this.props.onTableEnterKey} */
