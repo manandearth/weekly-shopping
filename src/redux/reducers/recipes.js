@@ -12,19 +12,23 @@ const initialState = {
 			1: {
 				name: 'rice',
 				qty: 50,
-				unit: 'gr'},
+				unit: 'gr',
+				editable: null},
 			2: {
 				name: 'unsalted butter',
 				qty: 25,
-				unit: 'gr'},
+				unit: 'gr',
+				editable: null},
 			3: {
 				name: 'whole milk',
 				qty: 500,
-				unit: 'ml'},
+				unit: 'ml',
+				editable: null},
 			4: {
 				name: 'caster sugar',
 				qty: 25,
-				unit: 'gr'}
+				unit: 'gr',
+				editable: null}
 			
 		}
 	},
@@ -37,19 +41,23 @@ const initialState = {
 			1: {
 				name: 'potatoes',
 				qty: 1,
-				unit: 'kg'},
+				unit: 'kg',
+				editable: null},
 			2: {
 				name: 'whole milk',
 				qty: 250,
-				unit: 'ml'},
+				unit: 'ml',
+				editable: null},
 			3: {
 				name: 'butter',
 				qty: 50,
-				unit: 'gr'},
+				unit: 'gr',
+				editable: null},
 			4: {
 				name: 'salt',
 				qty: 2,
-				unit: 'gr'}}
+				unit: 'gr',
+				editable: null}}
 	}
 }; 
 

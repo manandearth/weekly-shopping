@@ -4,14 +4,21 @@ import _ from  'lodash';
 import RecipeTopLevel from './RecipeTopLevel.js';
 import RecipeIngredientsTable from './RecipeIngredientsTable';
 import { toggleTitle, toggleServings, updateTitle } from '../redux/actions';
-import {  getSelectedFromRecipes, getSelectedRecipe, getSelectedServings, getSelectedIngredients, getSelectedEditableServings, getSelectedEditableTitle  } from '../redux/selectors';
+import { getEdited,  getSelectedFromRecipes, getSelectedRecipe, getSelectedIngredients } from '../redux/selectors';
 import { editRecipeTitlePH } from '../constants/placeholders';
 
 class EditRecipe extends React.Component {
 
   constructor(props) {
     super(props);
+    // this.handleGetIngredients = this.handleGetIngredients.bind(this);
   }
+
+
+  handleGetIngredients = () => 
+    this.props.edited.ingredients ?
+    {1: {name: 's', qty: 8, unit: 'kg'}} :
+  {1: {name: 't', qty: 5, unit: 'litre'}};
   
   handleTitleClick = (e) =>
     e.target.innerHTML !== editRecipeTitlePH ?
@@ -26,25 +33,31 @@ class EditRecipe extends React.Component {
   handleUpdateTitle = title => {
     this.props.updateTitle(this.props.recipe, title);
   }
-
+  
 	render(props) {
+    const here = {
+      1: {unit: 'kg', qty: 2, name: 'hummus'},
+      2: {unit: 'litre', qty: 3, name: 'tahini'}
+    };
+    const there = this.props.edited.ingredients;
 		return (
         <div className='edit-recipe'>
           <RecipeTopLevel
             topBar={'Edit recipe'}
-            title={this.props.recipe}
-            editableTitle={this.props.editableTitle}
-            editableServings={this.props.editableServings}
-            servings={this.props.servings}
+            title={this.props.edited.title}
+            editableTitle={this.props.edited.editableTitle}
+            editableServings={this.props.edited.editableServings}
+            servings={this.props.edited.servings}
             onTitleClick={this.handleTitleClick}
             onUpdateTitle={this.handleUpdateTitle}
             onServingsClick={() => this.handleServingsClick(this.props.recipe, this.props.servings)}
-            servings={this.props.servings}
           />
           <EditRecipeIngredientsTable
-            ingredients={this.props.ingredients}
+            ingredients={this.handleGetIngredients}
+              /* {this.handleGetIngredients} */
           />
         </div>
+      
     );
   }
 }
@@ -73,18 +86,13 @@ const mapStateToProps = state => {
   // const { selectedRecipe, recipes } = state;
   const selectedRecipe = getSelectedFromRecipes(state);
   const recipe = getSelectedRecipe(state);
-  const servings = getSelectedServings(state);
   const ingredients = getSelectedIngredients(state);
-  const editableTitle = getSelectedEditableTitle(state);
-  const editableServings = getSelectedEditableServings(state);
+  const edited = getEdited(state);
   // const ingredients = {1:{name: 'foo', unit: 'kg', qty: 99}};
   return {
+    edited,
     selectedRecipe,
-    recipe,
-    servings,
-    ingredients,
-    editableTitle,
-    editableServings
+    recipe
   };
 };
 

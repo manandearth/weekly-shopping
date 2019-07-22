@@ -3,6 +3,11 @@ import { editRecipeTitlePH } from '../constants/placeholders';
 
 export const getRecipesState = store => store.recipes;
 
+export const getEdited = store =>
+	store.editedRecipe.recipe ?
+	store.editedRecipe.recipe :
+	{};
+
 export const getSelectedRecipe = store => 
 	store.selections.selectedRecipe.recipe ?
 	store.selections.selectedRecipe.recipe :
