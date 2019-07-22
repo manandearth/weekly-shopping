@@ -5,12 +5,14 @@ import RecipeTopLevel from './RecipeTopLevel.js';
 import RecipeIngredientsTable from './RecipeIngredientsTable';
 import { toggleTitle, toggleServings } from '../redux/actions';
 import { getSelectedRecipe, getSelectedServings, getSelectedIngredients, getSelectedEditableServings, getSelectedEditableTitle  } from '../redux/selectors';
+import { editRecipeTitlePH } from '../constants/placeholders';
 
 class EditRecipe extends React.Component {
 
   handleTitleClick = (e) =>
-    this.props.toggleTitle(e.target.innerHTML)
-  ;
+    e.target.innerHTML !== editRecipeTitlePH ?
+    this.props.toggleTitle(e.target.innerHTML) :
+      null;
   
 	render(props) {
 		return (

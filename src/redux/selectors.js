@@ -1,11 +1,12 @@
 import _ from 'lodash';
+import { editRecipeTitlePH } from '../constants/placeholders';
 
 export const getRecipesState = store => store.recipes;
 
 export const getSelectedRecipe = store => 
 	store.selections.selectedRecipe.recipe ?
 	store.selections.selectedRecipe.recipe :
-	'pick a recipe to edit';
+	editRecipeTitlePH;
 
 export const getSelectedFromRecipes = store => {
 	const recipes = getRecipesState(store);
