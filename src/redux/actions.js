@@ -1,4 +1,4 @@
-import { ADD_RECIPE, SELECT_RECIPE, TOGGLE_TITLE, TOGGLE_SERVINGS, UPDATE_TITLE, UPDATE_SERVINGS, EDIT_RECIPE, TOGGLE_TABLE, UPDATE_TABLE } from './actionTypes';
+import { ADD_RECIPE, SELECT_RECIPE, TOGGLE_TITLE, TOGGLE_SERVINGS, UPDATE_TITLE, UPDATE_SERVINGS, EDIT_RECIPE, TOGGLE_TABLE, UPDATE_TABLE, RESET_ON_SUBMIT } from './actionTypes';
 
 // let nextRecipeId = 1;
 
@@ -62,4 +62,8 @@ export const updateTable = ( id, className, value ) => ({
 		id,
 		className,
 		value}
+});
+
+export const resetOnSubmit = () => ({
+	type: RESET_ON_SUBMIT
 });
