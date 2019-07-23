@@ -1,4 +1,4 @@
-import { EDIT_RECIPE, TOGGLE_TITLE, TOGGLE_SERVINGS, UPDATE_TITLE, UPDATE_SERVINGS, TOGGLE_TABLE } from '../actionTypes';
+import { EDIT_RECIPE, TOGGLE_TITLE, TOGGLE_SERVINGS, UPDATE_TITLE, UPDATE_SERVINGS, TOGGLE_TABLE, UPDATE_TABLE } from '../actionTypes';
 
 const initialState = {
 	recipe: {}
@@ -66,7 +66,21 @@ export default function(state = initialState, action) {
 				}
 			};
 		}
-	
+
+		case UPDATE_TABLE: {
+			const { id, className, value } = action.payload;
+			return {
+				...state,
+				recipe: {...state.recipe,
+					ingredients: {...state.recipe.ingredients,
+						[id]: {...state.recipe.ingredients[id],
+							[className]: value
+						}
+					}
+				}
+			};
+		}
+			
 		default: return state;}
 
 }
