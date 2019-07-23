@@ -1,4 +1,4 @@
-import { EDIT_RECIPE, TOGGLE_TITLE, TOGGLE_SERVINGS, UPDATE_TITLE } from '../actionTypes';
+import { EDIT_RECIPE, TOGGLE_TITLE, TOGGLE_SERVINGS, UPDATE_TITLE, UPDATE_SERVINGS } from '../actionTypes';
 
 const initialState = {
 	recipe: {}
@@ -33,13 +33,22 @@ export default function(state = initialState, action) {
 			};
 	}
 
-						//TODO MAKE THIS WORK -> UPDATE THE TITLE
 		case UPDATE_TITLE: {
 			const { title } = action.payload;
 			return {
 				...state,
 				recipe: {...state.recipe,
 					title: title
+				}
+			};
+		}
+
+		case UPDATE_SERVINGS: {
+			const { servings } = action.payload;
+			return {
+				...state,
+				recipe: {...state.recipe,
+					servings: servings
 				}
 			};
 		}

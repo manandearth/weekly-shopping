@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import _ from  'lodash';
 import RecipeTopLevel from './RecipeTopLevel.js';
 import RecipeIngredientsTable from './RecipeIngredientsTable';
-import { toggleTitle, toggleServings, updateTitle } from '../redux/actions';
+import { toggleTitle, toggleServings, updateTitle, updateServings } from '../redux/actions';
 import { getEdited } from '../redux/selectors';
 import { editRecipeTitlePH } from '../constants/placeholders';
-
+import { inputParsers } from '../utilities/parsers';
 class EditRecipe extends React.Component {
 
   handleGetIngredients = ( ingredients ) =>
@@ -38,11 +38,30 @@ class EditRecipe extends React.Component {
       this.props.toggleTitle();
     }}
 
+    handleTitleBlur = () =>
+    this.props.edited.editableTitle ?
+    this.props.toggleTitle() : null;
+
+  
+  handleServingsEnterKey = (e) => {
+    const keyCode = e.keyCode || e.which;
+    if (keyCode === 13) {
+      this.props.toggleServings();
+    }}
+
   
   handleServingsClick = ( servings ) =>
     servings !== 0 ?
     this.props.toggleServings() :
     null;
+
+  handleUpdateServings =  servings  =>
+    this.props.updateServings( inputParsers.integer(servings) );
+
+  handleServingsBlur = () =>
+    this.props.edited.editableServings ?
+    this.props.toggleServings() : null;
+
   
 	render(props) {
 
@@ -56,8 +75,12 @@ class EditRecipe extends React.Component {
             servings={this.handleGetServings(this.props.edited.servings)}
             onTitleClick={this.handleTitleClick}
             onTitleEnterKey={this.handleTitleEnterKey}
+            onTitleBlur={this.handleTitleBlur}
             onUpdateTitle={this.handleUpdateTitle}
             onServingsClick={() => this.handleServingsClick(this.props.edited.servings)}
+            onUpdateServings={this.handleUpdateServings}
+            onServingsEnterKey={this.handleServingsEnterKey}
+            onServingsBlur={this.handleServingsBlur}
           />
           <EditRecipeIngredientsTable
             key={'ingredients-' + this.props.edited.title}
@@ -99,7 +122,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { toggleTitle, toggleServings, updateTitle })(EditRecipe);
+export default connect(mapStateToProps, { toggleTitle, toggleServings, updateTitle, updateServings })(EditRecipe);
 
 
 

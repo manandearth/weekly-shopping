@@ -1,4 +1,4 @@
-import { ADD_RECIPE, SELECT_RECIPE, TOGGLE_TITLE, TOGGLE_SERVINGS, UPDATE_TITLE, EDIT_RECIPE } from './actionTypes';
+import { ADD_RECIPE, SELECT_RECIPE, TOGGLE_TITLE, TOGGLE_SERVINGS, UPDATE_TITLE, UPDATE_SERVINGS, EDIT_RECIPE } from './actionTypes';
 
 // let nextRecipeId = 1;
 
@@ -35,7 +35,13 @@ export const updateTitle = ( title ) => ({
 	payload: {
 		title}
 });
-	
+
+export const updateServings = ( servings ) => ({
+	type: UPDATE_SERVINGS,
+	payload: {
+		servings}
+});
+
 export const editRecipe = ( recipe ) => ({
 	type: EDIT_RECIPE,
 	payload: {
