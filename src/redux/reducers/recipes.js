@@ -81,7 +81,7 @@ export default function(state = initialState, action) {
 			};
 		}
 		case TOGGLE_SERVINGS: {
-			const { title, servings } = action.payload;
+			const { title } = action.payload;
 			return {
 				...state,
 				[title]: {...state[title],

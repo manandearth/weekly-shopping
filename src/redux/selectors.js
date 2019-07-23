@@ -20,14 +20,12 @@ export const getSelectedFromRecipes = store => {
 };
 
 export const getSelectedServings = store => {
-	const selectedRecipe = getSelectedFromRecipes(store);
 	return( 
 		store.selections.selectedRecipe.recipe && store.recipes ?
 			_.values(getSelectedFromRecipes(store))[0].servings :
 			'' );};
 
 export const getSelectedIngredients = store => {
-	const selectedRecipe = getSelectedFromRecipes(store);
 	return (
 		store.selections.selectedRecipe.recipe && store.recipes ?
 			_.values(getSelectedFromRecipes(store))[0].ingredients :
@@ -36,21 +34,18 @@ export const getSelectedIngredients = store => {
 };
 
 export const getSelectedEditableServings = store => {
-	const selectedRecipe = getSelectedFromRecipes(store);
 	return( 
 		store.selections.selectedRecipe.recipe && store.recipes ?
 			_.values(getSelectedFromRecipes(store))[0].editableServings :
 			'' );};
 
 export const getSelectedEditableTitle = store => {
-	const selectedRecipe = getSelectedFromRecipes(store);
 	return( 
 		store.selections.selectedRecipe.recipe && store.recipes ?
 			_.values(getSelectedFromRecipes(store))[0].editableTitle :
 			'' );};
 
 export const getSelectedToEdit = store => {
-	const selectedRecipe = getSelectedFromRecipes(store);
 	return (
 		store.selections.selectedRecipe.recipe && store.recipes ?
 			_.values(getSelectedFromRecipes(store))[0] : {}

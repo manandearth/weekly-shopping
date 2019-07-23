@@ -19,7 +19,7 @@ class  RecipeList extends React.Component {
 			<div className='recipe-list'>
         <h2 className='title'>The recipes</h2>
         <div className='recipe-list-block'>
-          {_.keys(this.props.recipes).map((id) =>
+          {_.keys(recipes).map((id) =>
             <button className='recipe-list-item'
                     key={'recipe-' + id}
                     onClick={() => this.handleClick(id)}
