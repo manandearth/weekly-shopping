@@ -1,3 +1,31 @@
+# Weekly Shopping
+
+An exercise in React-Redux.
+
+Live App found in:
+
+https://manandearth.github.io/weekly-shopping/
+
+## Synopsis
+
+The general idea is a database of recipes and ingredients collected by the user, that are use to build a weekly menu (family, restaurant) based on number of servings and quantities compared to available formats. The output will be a shopping list. simple.
+
+## Structure
+
+  * Add new recipe form
+  * List of recipes
+  * Edit recipe from the list
+  * TODO Week table -> days column in which there is a group for each meal in the day, fields: recipe/servings(int) 
+  * TODO a list of all ingredients added from the weekly meals
+  * TODO a growing table of ingredients formats:
+  
+  ( "extra virgin olive oil": [ 1 litre, 500 ml, 5 litre] )
+  /this perhaps could be tied to a supermarker inventory/
+ 
+   * TODO from the output the user can then deduct ingredients in stock to produce an optimal total.
+   
+  
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

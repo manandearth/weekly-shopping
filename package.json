@@ -2,7 +2,9 @@
   "name": "weekly-shopping",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://manandearth.github.io/weekly-shopping",
   "dependencies": {
+    "gh-pages": "^2.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
@@ -10,6 +12,8 @@
     "redux": "^4.0.2"
   },
   "scripts": {
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -18,8 +22,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-
-	"devDependencies": {
+  "devDependencies": {
     "eslint": "^3.11.1",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-babel": "^4.1.2",
@@ -27,15 +30,14 @@
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.8.0",
     "eslint-watch": "3.1.2"
-	  },
-	
+  },
   "browserslist": {
     "production": [
       ">0.2%",
       "not dead",
       "not op_mini all"
     ],
-	  "development": [
+    "development": [
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
