@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { ADD_RECIPE, TOGGLE_TITLE, TOGGLE_SERVINGS, UPDATE_TITLE } from "../actionTypes";
+import { ADD_RECIPE, UPDATE_TITLE } from "../actionTypes";
 
 const initialState = {
 	
@@ -71,24 +71,7 @@ export default function(state = initialState, action) {
 				[recipe]: content
       };
     }
-		case TOGGLE_TITLE: {
-			const { title } = action.payload;
-			return {
-				...state,
-				[title]: {...state[title],
-					editableTitle: !state[title].editableTitle 
-				}	
-			};
-		}
-		case TOGGLE_SERVINGS: {
-			const { title } = action.payload;
-			return {
-				...state,
-				[title]: {...state[title],
-					editableServings: !state[title].editableServings 
-				}	
-			};
-		}
+	
 			//TODO MAKE THIS WORK -> UPDATE THE TITLE
 		case UPDATE_TITLE: {
 			const { recipe, title } = action.payload;

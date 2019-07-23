@@ -28,9 +28,9 @@ class EditRecipe extends React.Component {
     this.props.toggleTitle(e.target.innerHTML) :
     null;
   
-  handleServingsClick = ( recipe, servings ) =>
-    servings !== '' ?
-    this.props.toggleServings(recipe, servings) :
+  handleServingsClick = ( servings ) =>
+    servings !== 0 ?
+    this.props.toggleServings() :
     null;
 
   handleUpdateTitle = title => {
@@ -49,7 +49,7 @@ class EditRecipe extends React.Component {
             servings={this.handleGetServings(this.props.edited.servings)}
             onTitleClick={this.handleTitleClick}
             onUpdateTitle={() => this.handleUpdateTitle}
-            onServingsClick={() => this.handleServingsClick(this.props.recipe, this.props.servings)}
+            onServingsClick={() => this.handleServingsClick(this.props.edited.servings)}
           />
           <EditRecipeIngredientsTable
             key={'ingredients-' + this.props.edited.title}
