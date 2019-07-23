@@ -69,7 +69,24 @@ class EditRecipe extends React.Component {
     let idx = parseInt(target.id);
     this.props.toggleTable( idx, className );
 	}
-  
+
+    handleTableEnterKey = (event) => {
+    const  ingredients = this.props.edited.ingredients;
+    const target = event.target;
+    let idx = parseInt(target.id);
+    const keyCode = event.keyCode || event.which;
+      if (keyCode === 13) {
+        this.props.toggleTable( idx, null );
+    }
+  }
+
+    handleTableBlur = (event) => {
+    const  ingredients = this.props.edited.ingredients;
+    const target = event.target;
+    let idx = parseInt(target.id);
+      this.props.toggleTable( idx, null );
+  }
+
 	render(props) {
 
 		return (
@@ -93,6 +110,8 @@ class EditRecipe extends React.Component {
             key={'ingredients-' + this.props.edited.title}
             ingredients={this.handleGetIngredients(this.props.edited.ingredients)}
             onTableClick={this.handleTableClick}
+            onTableEnterKey={this.handleTableEnterKey}
+            onTableBlur={this.handleTableBlur}
       /* {this.handleGetIngredients} */
           />
         </div>
@@ -111,8 +130,8 @@ class EditRecipeIngredientsTable extends React.Component {
           ingredients={this.props.ingredients}
           /* onTableChange={this.props.onTableChange} */
           onTableClick={this.props.onTableClick}
-          /* onTableEnterKey={this.props.onTableEnterKey} */
-          /* onTableBlur={this.props.onTableBlur} */
+          onTableEnterKey={this.props.onTableEnterKey}
+          onTableBlur={this.props.onTableBlur}
         />
       </div>
 	  );
