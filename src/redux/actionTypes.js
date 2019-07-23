@@ -5,3 +5,4 @@ export const TOGGLE_SERVINGS = "TOGGLE_SERVINGS";
 export const UPDATE_TITLE = "UPDATE_TITLE";
 export const UPDATE_SERVINGS = "UPDATE_SERVINGS";
 export const EDIT_RECIPE = "EDIT_RECIPE";
+export const TOGGLE_TABLE = "TOGGLE_TABLE";

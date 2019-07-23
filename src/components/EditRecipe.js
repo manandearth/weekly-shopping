@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import _ from  'lodash';
 import RecipeTopLevel from './RecipeTopLevel.js';
 import RecipeIngredientsTable from './RecipeIngredientsTable';
-import { toggleTitle, toggleServings, updateTitle, updateServings } from '../redux/actions';
+import { toggleTitle, toggleServings, updateTitle, updateServings, toggleTable } from '../redux/actions';
 import { getEdited } from '../redux/selectors';
 import { editRecipeTitlePH } from '../constants/placeholders';
 import { inputParsers } from '../utilities/parsers';
@@ -62,6 +62,13 @@ class EditRecipe extends React.Component {
     this.props.edited.editableServings ?
     this.props.toggleServings() : null;
 
+  handleTableClick  = (event) => {
+    const ingredients = this.props.edited.ingredients;
+    const target = event.target;
+    const className = target.className;
+    let idx = parseInt(target.id);
+    this.props.toggleTable( idx, className );
+	}
   
 	render(props) {
 
@@ -84,8 +91,9 @@ class EditRecipe extends React.Component {
           />
           <EditRecipeIngredientsTable
             key={'ingredients-' + this.props.edited.title}
-            onIngredients={this.handleGetIngredients(this.props.edited.ingredients)}
-              /* {this.handleGetIngredients} */
+            ingredients={this.handleGetIngredients(this.props.edited.ingredients)}
+            onTableClick={this.handleTableClick}
+      /* {this.handleGetIngredients} */
           />
         </div>
       
@@ -100,9 +108,9 @@ class EditRecipeIngredientsTable extends React.Component {
       <div>
         <RecipeIngredientsTable
           onAddIngredient={this.props.onAddIngredient}
-          ingredients={this.props.onIngredients}
+          ingredients={this.props.ingredients}
           /* onTableChange={this.props.onTableChange} */
-          /* onTableClick={this.props.onTableClick} */
+          onTableClick={this.props.onTableClick}
           /* onTableEnterKey={this.props.onTableEnterKey} */
           /* onTableBlur={this.props.onTableBlur} */
         />
@@ -122,7 +130,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { toggleTitle, toggleServings, updateTitle, updateServings })(EditRecipe);
+export default connect(mapStateToProps, { toggleTitle, toggleServings, updateTitle, updateServings, toggleTable })(EditRecipe);
 
 
 

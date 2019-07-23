@@ -1,4 +1,4 @@
-import { ADD_RECIPE, SELECT_RECIPE, TOGGLE_TITLE, TOGGLE_SERVINGS, UPDATE_TITLE, UPDATE_SERVINGS, EDIT_RECIPE } from './actionTypes';
+import { ADD_RECIPE, SELECT_RECIPE, TOGGLE_TITLE, TOGGLE_SERVINGS, UPDATE_TITLE, UPDATE_SERVINGS, EDIT_RECIPE, TOGGLE_TABLE } from './actionTypes';
 
 // let nextRecipeId = 1;
 
@@ -48,3 +48,10 @@ export const editRecipe = ( recipe ) => ({
 		recipe
 	}
 });
+
+export const toggleTable = ( id, className ) => ({
+	type: TOGGLE_TABLE,
+	payload: {
+		id,
+		className}
+	});
