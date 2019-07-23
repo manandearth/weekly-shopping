@@ -19,7 +19,7 @@ class EditRecipe extends React.Component {
     servings : 0;
 
   handleGetTitle = ( title ) =>
-    title ?
+    title || title === '' ?
     title :
     editRecipeTitlePH;
   
@@ -27,15 +27,22 @@ class EditRecipe extends React.Component {
     e.target.innerHTML !== editRecipeTitlePH ?
     this.props.toggleTitle(e.target.innerHTML) :
     null;
+
+  handleUpdateTitle = ( title ) => {
+    this.props.updateTitle( title );
+  }
+ 
+  handleTitleEnterKey = (e) => {
+    const keyCode = e.keyCode || e.which;
+    if (keyCode === 13) {
+      this.props.toggleTitle();
+    }}
+
   
   handleServingsClick = ( servings ) =>
     servings !== 0 ?
     this.props.toggleServings() :
     null;
-
-  handleUpdateTitle = title => {
-    this.props.updateTitle(this.props.recipe, title);
-  }
   
 	render(props) {
 
@@ -48,7 +55,8 @@ class EditRecipe extends React.Component {
             editableServings={this.props.edited.editableServings}
             servings={this.handleGetServings(this.props.edited.servings)}
             onTitleClick={this.handleTitleClick}
-            onUpdateTitle={() => this.handleUpdateTitle}
+            onTitleEnterKey={this.handleTitleEnterKey}
+            onUpdateTitle={this.handleUpdateTitle}
             onServingsClick={() => this.handleServingsClick(this.props.edited.servings)}
           />
           <EditRecipeIngredientsTable

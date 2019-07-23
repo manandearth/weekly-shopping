@@ -30,10 +30,9 @@ export const toggleServings = ( title, servings ) => ({
 		servings}
 });
 
-export const updateTitle = ( recipe, title ) => ({
+export const updateTitle = ( title ) => ({
 	type: UPDATE_TITLE,
 	payload: {
-		recipe,
 		title}
 });
 	
