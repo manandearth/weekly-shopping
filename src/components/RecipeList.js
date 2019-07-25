@@ -9,7 +9,7 @@ class  RecipeList extends React.Component {
   handleClick = (recipe) => {
     setTimeout(() => {
     this.props.selectRecipe(recipe);
-      this.props.editRecipe(this.props.selected);}, 1000);
+      this.props.editRecipe(this.props.selected);}, 100);
   }
   
   render (){
