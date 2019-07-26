@@ -20,3 +20,19 @@ I am trying this with a parsing namespace under `/utilities`
 ** errors
 One idea is a wrapper handler that catches any error and renders some component/error message
 
+
+* redux-persist
+
+during development the rehydrated state in the store can be sticky and
+update to a previous(not default) state.  Use the `blacklist:` key to
+temporarily shake the part of the store that's sticky, same as
+`pantry` in the example below:
+
+#+BEGIN_SRC js
+const persistConfig = {
+ key: 'root',
+ storage: storage,
+	stateReconciler: autoMergeLevel2,// see "Merge Process" section for details.
+	blacklist: ['pantry'] 
+};
+#+END_SRC

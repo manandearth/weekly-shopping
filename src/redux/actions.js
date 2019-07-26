@@ -1,4 +1,4 @@
-import { ADD_RECIPE, SELECT_RECIPE, TOGGLE_TITLE, TOGGLE_SERVINGS, UPDATE_TITLE, UPDATE_SERVINGS, EDIT_RECIPE, TOGGLE_TABLE, UPDATE_TABLE, RESET_EDIT } from './actionTypes';
+import { ADD_RECIPE, SELECT_RECIPE, TOGGLE_TITLE, TOGGLE_SERVINGS, UPDATE_TITLE, UPDATE_SERVINGS, EDIT_RECIPE, TOGGLE_TABLE, UPDATE_TABLE, RESET_EDIT, ADD_PRODUCT } from './actionTypes';
 
 // let nextRecipeId = 1;
 
@@ -67,3 +67,13 @@ export const updateTable = ( id, className, value ) => ({
 export const resetEdit = () => ({
 	type: RESET_EDIT
 });
+
+
+export const addProduct = ( product, formats ) => ({
+	type: ADD_PRODUCT,
+	payload: {
+		product,
+		formats
+	}
+});
+	

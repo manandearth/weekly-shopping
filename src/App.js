@@ -4,6 +4,8 @@ import './App.css';
 import NewRecipe from './components/NewRecipe';
 import RecipeList from './components/RecipeList';
 import EditRecipe from './components/EditRecipe';
+import IngredientsDB from './components/IngredientsDB';
+
 function ColorBtn() {
   return (
     <button>cook</button>
@@ -23,6 +25,9 @@ function App() {
         <NewRecipe />
         <RecipeList />
         <EditRecipe />
+      </div>
+      <div className='ingredientsDB'>
+        <IngredientsDB />
       </div>
     </div>
     
