@@ -4,7 +4,7 @@ import _ from  'lodash';
 import RecipeTopLevel from './RecipeTopLevel.js';
 import RecipeIngredientsTable from './RecipeIngredientsTable';
 import SubmitRecipe from './SubmitRecipe';
-import { toggleTitle, toggleServings, updateTitle, updateServings, toggleTable, updateTable, resetOnSubmit } from '../redux/actions';
+import { toggleTitle, toggleServings, updateTitle, updateServings, toggleTable, updateTable, resetEdit } from '../redux/actions';
 import { getEdited } from '../redux/selectors';
 import { editRecipeTitlePH } from '../constants/placeholders';
 import { inputParsers } from '../utilities/parsers';
@@ -104,8 +104,9 @@ class EditRecipe extends React.Component {
     }
   ;
 
-  handleSubmitReset = () =>
-    this.props.resetOnSubmit();
+  handleResetEdit = () =>
+    this.props.resetEdit();
+
   
 	render(props) {
 
@@ -140,8 +141,12 @@ class EditRecipe extends React.Component {
          title={this.props.edited.title}
             servings={this.props.edited.servings}
             ingredients={this.props.edited.ingredients}
-          onSubmitReset={this.handleSubmitReset}
-        />
+          onSubmitReset={this.handleResetEdit}
+          />
+          <button
+            className='button'
+            onClick= {this.handleResetEdit}
+          >Cancel</button>
         </div>
       
     );
@@ -177,7 +182,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { toggleTitle, toggleServings, updateTitle, updateServings, toggleTable, updateTable, resetOnSubmit })(EditRecipe);
+export default connect(mapStateToProps, { toggleTitle, toggleServings, updateTitle, updateServings, toggleTable, updateTable, resetEdit })(EditRecipe);
 
 
 

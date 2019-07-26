@@ -1,4 +1,4 @@
-import { EDIT_RECIPE, TOGGLE_TITLE, TOGGLE_SERVINGS, UPDATE_TITLE, UPDATE_SERVINGS, TOGGLE_TABLE, UPDATE_TABLE, RESET_ON_SUBMIT } from '../actionTypes';
+import { EDIT_RECIPE, TOGGLE_TITLE, TOGGLE_SERVINGS, UPDATE_TITLE, UPDATE_SERVINGS, TOGGLE_TABLE, UPDATE_TABLE, RESET_EDIT } from '../actionTypes';
 
 const initialState = {
 	recipe: {}
@@ -82,7 +82,7 @@ export default function(state = initialState, action) {
 		}
 			
 	
-		case RESET_ON_SUBMIT: {
+		case RESET_EDIT: {
 			return {...state,
 				recipe: {}
 			};
