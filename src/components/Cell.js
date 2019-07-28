@@ -1,5 +1,8 @@
 import React from 'react';
 import './Cell.css';
+import { getRecipesState } from '../redux/selectors';
+import { connect } from 'react-redux';
+import _ from 'lodash';
 
 class Cell extends React.Component {
 
@@ -31,8 +34,11 @@ class Cell extends React.Component {
   handleToggleEdit = (field) =>
     this.setState({[field]: !this.state[field]});
 
-  handleUpdateInput = dish =>
-  this.setState({dish: dish});
+  handleUpdateInput = e => {
+    const value = e.target.value;
+    const field = e.target.name;
+  this.setState({[field]: value});
+  }
   
   handleEnterKey = (e) => {
     const keyCode = e.keyCode || e.which;
@@ -64,20 +70,31 @@ class Cell extends React.Component {
                 onClick={() => this.handleToggleEdit('editableDish')}
                  >
                 {'Dish: ' + this.state.dish }</h2> :
-              <input
+              <div><input
+                type='text'
                 name='dish'
                 onKeyDown={this.handleEnterKey}
-                onChange={e => this.handleUpdateInput(e.target.value)}
-                value={this.state.dish}
-              ></input>}
+                onChange={e => this.handleUpdateInput(e)}
+                     list='dishes'
+                     value={this.state.dish}/>
+                 <datalist id='dishes'>
+                   {_.keys(this.props.recipes).map(recipe => (
+                     <option value={recipe} />))}
+                </datalist>
+              </div>
+              }
           {this.state.editableServings === false ?
             <h2
               onClick={() => this.handleToggleEdit('editableServings')}
-            >Servings:</h2>
+            >{'Servings:' + this.state.servings}</h2>
             :
             <input
-              name='Servings'
-              onKeyDown={this.handleEnterKey}></input>}
+              name='servings'
+              type='number'
+              value ={this.state.servings}
+              onKeyDown={this.handleEnterKey}
+              onChange={e => this.handleUpdateInput(e)}
+            ></input>}
           </div>
           
         }
@@ -86,6 +103,12 @@ class Cell extends React.Component {
   }
 }
 	
+const mapStateToProps = state => {
+  const recipes = getRecipesState(state);
+  return {
+    recipes};
+
+};
 
 
-export default Cell;
+export default connect(mapStateToProps)(Cell);
