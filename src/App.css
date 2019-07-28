@@ -120,3 +120,13 @@
 .qty {
     width: 30px;
 }
+
+.weekly-view-header {
+    width: 200px;
+}
+
+.weekly-view-cell {
+    width: 200px;
+    height: 100px;
+    background-color: floralwhite;
+}

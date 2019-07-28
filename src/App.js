@@ -5,7 +5,7 @@ import NewRecipe from './components/NewRecipe';
 import RecipeList from './components/RecipeList';
 import EditRecipe from './components/EditRecipe';
 import IngredientsDB from './components/IngredientsDB';
-
+import WeeklyView from './components/WeeklyView';
 function ColorBtn() {
   return (
     <button>cook</button>
@@ -28,6 +28,7 @@ function App() {
       </div>
       <div className='ingredientsDB'>
         <IngredientsDB />
+        <WeeklyView />
       </div>
     </div>
     

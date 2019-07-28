@@ -1,4 +1,4 @@
-import { EDIT_RECIPE, TOGGLE_TITLE, TOGGLE_SERVINGS, UPDATE_TITLE, UPDATE_SERVINGS, TOGGLE_TABLE, UPDATE_TABLE, RESET_EDIT } from '../actionTypes';
+import { EDIT_RECIPE, TOGGLE_TITLE, TOGGLE_SERVINGS, UPDATE_TITLE, UPDATE_SERVINGS, TOGGLE_TABLE, UPDATE_TABLE, RESET_EDIT, ADD_INGREDIENT } from '../actionTypes';
 
 const initialState = {
 	recipe: {}
@@ -88,6 +88,16 @@ export default function(state = initialState, action) {
 			};
 		}
 
+		case ADD_INGREDIENT: {
+			const existingIngredients = 7;
+			return {...state,
+				recipe: {...state.recipe,
+					ingredients: {...state.recipe.ingredients,
+						[existingIngredients + 1]: {name: 'new ingredient', qty: 1, unit: 'kg'}
+					}
+				}
+			};
+		}
 		default: return state;}
 
 }

@@ -59,7 +59,7 @@ export default class NewRecipe extends React.Component {
 
   handleAddIngredient = () => {
     let id = ++this.nextid;
-    this.setState({ingredients: {...this.state.ingredients, [id]: { name: 'new ingredient', qty: 1, unit: 'Kg', editable: null}}});
+    this.setState({ingredients: {...this.state.ingredients, [id]: { name: 'new ingredient', qty: 1, unit: 'kg', editable: null}}});
   }
 
   handleTableClick  = (event) => {

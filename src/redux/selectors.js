@@ -50,3 +50,8 @@ export const getSelectedToEdit = store => {
 		store.selections.selectedRecipe.recipe && store.recipes ?
 			_.values(getSelectedFromRecipes(store))[0] : {}
 	);};
+
+export const getProducts = store => {
+	return (
+		store.pantry.pantry);
+};
