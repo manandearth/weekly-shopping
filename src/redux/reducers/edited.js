@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { EDIT_RECIPE, TOGGLE_TITLE, TOGGLE_SERVINGS, UPDATE_TITLE, UPDATE_SERVINGS, TOGGLE_TABLE, UPDATE_TABLE, RESET_EDIT, ADD_INGREDIENT } from '../actionTypes';
 
 const initialState = {
@@ -89,7 +90,7 @@ export default function(state = initialState, action) {
 		}
 
 		case ADD_INGREDIENT: {
-			const existingIngredients = 7;
+			const existingIngredients = _.keys(state.recipe.ingredients).length;
 			return {...state,
 				recipe: {...state.recipe,
 					ingredients: {...state.recipe.ingredients,
