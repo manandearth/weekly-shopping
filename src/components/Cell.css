@@ -1,0 +1,20 @@
+.plus {
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px black;
+    cursor: pointer;
+}
+
+.plus:hover {
+    color: orange;
+}
+
+.cross {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px black;
+    cursor: pointer;
+    text-align: right;
+    margin-right: 10px;
+}
