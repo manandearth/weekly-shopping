@@ -48,7 +48,11 @@ class Cell extends React.Component {
     }
   }
 
-
+  handleBlur = (e) => {
+    const field = 'editable' + this.titleCase(e.target.name);
+    this.setState({[field]: !this.state[field]});
+  }
+    
   
   render () {
 		return(
@@ -71,12 +75,14 @@ class Cell extends React.Component {
                  >
                 {'Dish: ' + this.state.dish }</h2> :
               <div><input
-                type='text'
-                name='dish'
-                onKeyDown={this.handleEnterKey}
-                onChange={e => this.handleUpdateInput(e)}
+                     type='text'
+                     name='dish'
+                     onKeyDown={this.handleEnterKey}
+                     onChange={e => this.handleUpdateInput(e)}
+                     onBlur={this.handleBlur}
                      list='dishes'
-                     value={this.state.dish}/>
+                     value={this.state.dish}
+                   autoFocus/>
                  <datalist id='dishes'>
                    {_.keys(this.props.recipes).map(recipe => (
                      <option value={recipe} />))}
@@ -91,12 +97,16 @@ class Cell extends React.Component {
             <input
               name='servings'
               type='number'
-              value ={this.state.servings}
+              value={this.state.servings}
+              min='1'
+              step='1'
               onKeyDown={this.handleEnterKey}
               onChange={e => this.handleUpdateInput(e)}
+              onFocus={e => e.target.select()}
+              onBlur={this.handleBlur}
+              autoFocus
             ></input>}
           </div>
-          
         }
       </div>
     );
