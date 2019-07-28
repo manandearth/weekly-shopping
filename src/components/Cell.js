@@ -7,7 +7,9 @@ class Cell extends React.Component {
     super(props);
     this.state = {
       editable: false,
+      editableDish: false,
       dish:'',
+      editableServings: false,
       servings: 0
     };
     
@@ -20,11 +22,23 @@ class Cell extends React.Component {
   handleRemoveMeal = () => {
     this.setState({editable: !this.state.editable});
   }
+
+  handleToggleEdit = (field) =>
+    this.setState({[field]: !this.state[field]});
+
+  handleEnterKey = (e) => {
+    const keyCode = e.keyCode || e.which;
+    const field = e.target.name;
+    if (keyCode === 13) {
+      this.setState({[field]: !this.state[field]});
+    }
+  }
+
+
   
   render () {
 		return(
       <div className='cell'>
-
         {this.state.editable === false
           ? 
           <p
@@ -37,8 +51,22 @@ class Cell extends React.Component {
               className='cross'
               onClick={this.handleRemoveMeal}
             >x</span>
-            <h2>Dish:<input></input></h2>
-            <h2>Servings:<input></input></h2></div>
+            {this.state.editableDish === false ?
+              <h2
+                onClick={() => this.handleToggleEdit('editableDish')}
+                 >
+                Dish:</h2> :
+              <input
+                name='editableDish'
+                 onKeyDown={this.handleEnterKey}
+              ></input>}
+          {this.state.editableServings === false ?
+            <h2
+              onClick={() => this.handleToggleEdit('editableServings')}
+            >Servings:</h2>
+            :
+            <input></input>}
+          </div>
           
         }
       </div>
