@@ -50,9 +50,9 @@ class Cell extends React.Component {
     }
   }
 
-  handleBlur = (e) => {
+  handleBlur = (e, cellID) => {
     const field = 'editable' + this.titleCase(e.target.name);
-    this.setState({[field]: !this.state[field]});
+    this.props.toggleField(cellID, field);
   }
 
   render () {
@@ -77,7 +77,7 @@ class Cell extends React.Component {
                      name='dish'
                      onKeyDown={(e) => this.handleEnterKey(e, cellID)}
                      onChange={e => this.handleUpdateInput(e, cellID)}
-                     onBlur={this.handleBlur}
+                     onBlur={(e) => this.handleBlur(e, cellID)}
                      list='dishes'
                      value={this.props.week.dish}
                    autoFocus/>
@@ -101,7 +101,7 @@ class Cell extends React.Component {
               onKeyDown={(e) => this.handleEnterKey(e, cellID)}
               onChange={e => this.handleUpdateInput(e, cellID)}
               onFocus={e => e.target.select()}
-              onBlur={this.handleBlur}
+              onBlur={(e) => this.handleBlur(e, cellID)}
               autoFocus
             ></input>}
           </div>
