@@ -1,7 +1,7 @@
 import React from 'react';
 import './Cell.css';
 import { getRecipesState } from '../redux/selectors';
-import { addCell, removeCell } from '../redux/actions';
+import { addCell, removeCell, toggleField } from '../redux/actions';
 import { getWeek } from '../redux/selectors';
 import { connect } from 'react-redux';
 import _ from 'lodash';
@@ -25,16 +25,16 @@ class Cell extends React.Component {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
   
-  handleAddMeal = () => {
-    this.setState({editable: !this.state.editable});
-  }
+  // handleAddMeal = () => {
+  //   this.setState({editable: !this.state.editable});
+  // }
 
   handleRemoveMeal = ( id ) => {
     this.props.removeCell( id );
   }
 
-  handleToggleEdit = (field) =>
-    this.setState({[field]: !this.state[field]});
+  handleToggleEdit = (cellID, field) =>
+    this.props.toggleField(cellID, field);
 
   handleUpdateInput = e => {
     const value = e.target.value;
@@ -67,9 +67,9 @@ class Cell extends React.Component {
               className='cross'
               onClick={() => this.handleRemoveMeal(cellID)}
             >x</span>
-            {this.state.editableDish === false ?
+            {this.props.week[cellID].editableDish === false ?
               <h2
-                onClick={() => this.handleToggleEdit('editableDish')}
+                onClick={() => this.handleToggleEdit(cellID, 'editableDish')}
                  >
                 {'Dish: ' + this.state.dish}</h2> :
               <div><input
@@ -87,9 +87,9 @@ class Cell extends React.Component {
                 </datalist>
               </div>
               }
-          {this.state.editableServings === false ?
+          {this.props.week[cellID].editableServings === false ?
             <h2
-              onClick={() => this.handleToggleEdit('editableServings')}
+              onClick={() => this.handleToggleEdit(cellID, 'editableServings')}
             >{'Servings:' + this.state.servings}</h2>
             :
             <input
@@ -129,4 +129,4 @@ const mapStateToProps = state => {
 };
 
 
-export default connect(mapStateToProps, { addCell, removeCell })(Cell);
+export default connect(mapStateToProps, { addCell, removeCell, toggleField })(Cell);

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { ADD_CELL, REMOVE_CELL } from '../actionTypes';
+import { ADD_CELL, REMOVE_CELL, TOGGLE_FIELD } from '../actionTypes';
 
 const initialState = {
 	 
@@ -25,10 +25,16 @@ export default function(state = initialState, action) {
 			const newState = Object.assign({}, state);
 			delete newState[cellID];
 			return newState;
-				
-				
 			};
-		
+
+		case TOGGLE_FIELD: {
+			const { cellID, field } = action.payload;
+			return {...state,
+				[cellID]: {...state[cellID],
+					[field]: !state[cellID][field]
+				}
+			};
+		}
 
 		default: return state;}
 
