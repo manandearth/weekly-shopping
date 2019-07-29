@@ -1,7 +1,7 @@
 import React from 'react';
 import './Cell.css';
 import { getRecipesState } from '../redux/selectors';
-import { addCell } from '../redux/actions';
+import { addCell, removeCell } from '../redux/actions';
 import { getWeek } from '../redux/selectors';
 import { connect } from 'react-redux';
 import _ from 'lodash';
@@ -29,8 +29,8 @@ class Cell extends React.Component {
     this.setState({editable: !this.state.editable});
   }
 
-  handleRemoveMeal = () => {
-    this.setState({editable: !this.state.editable});
+  handleRemoveMeal = ( id ) => {
+    this.props.removeCell( id );
   }
 
   handleToggleEdit = (field) =>
@@ -60,25 +60,18 @@ class Cell extends React.Component {
     
 		return(
       <div className='cell'>
-        {this.props.week[cellID] && this.props.week[cellID].editable === false
+        {this.props.week[cellID] && this.props.week[cellID].editable === true
           ? 
-          <p
-            className='plus'
-            onClick=
-              {() => this.props.addCell( cellID ) }
-              /* {this.handleAddMeal} */
-          >+</p>
-          :
           <div>
             <span
               className='cross'
-              onClick={this.handleRemoveMeal}
+              onClick={() => this.handleRemoveMeal(cellID)}
             >x</span>
             {this.state.editableDish === false ?
               <h2
                 onClick={() => this.handleToggleEdit('editableDish')}
                  >
-                {'Dish: ' + this.state.dish }</h2> :
+                {'Dish: ' + this.state.dish}</h2> :
               <div><input
                      type='text'
                      name='dish'
@@ -112,6 +105,13 @@ class Cell extends React.Component {
               autoFocus
             ></input>}
           </div>
+          :
+          <p
+            className='plus'
+            onClick=
+              {() => this.props.addCell( cellID ) }
+              /* {this.handleAddMeal} */
+          >+</p>
         }
       </div>
     );
@@ -129,4 +129,4 @@ const mapStateToProps = state => {
 };
 
 
-export default connect(mapStateToProps, { addCell })(Cell);
+export default connect(mapStateToProps, { addCell, removeCell })(Cell);
