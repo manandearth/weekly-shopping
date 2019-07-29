@@ -27,8 +27,8 @@ function App() {
         <EditRecipe />
       </div>
       <div className='ingredientsDB'>
-        <IngredientsDB />
         <WeeklyView />
+        <IngredientsDB />
       </div>
     </div>
     

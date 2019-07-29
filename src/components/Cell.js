@@ -1,6 +1,7 @@
 import React from 'react';
 import './Cell.css';
 import { getRecipesState } from '../redux/selectors';
+import { addCell } from '../redux/actions';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
@@ -52,16 +53,18 @@ class Cell extends React.Component {
     const field = 'editable' + this.titleCase(e.target.name);
     this.setState({[field]: !this.state[field]});
   }
-    
-  
+
   render () {
+    const cellID = this.props.cellID;
 		return(
       <div className='cell'>
         {this.state.editable === false
           ? 
           <p
             className='plus'
-           onClick={this.handleAddMeal}
+            onClick=
+              {() => this.props.addCell(cellID , "kaboom!") }
+              /* {this.handleAddMeal} */
           >+</p>
           :
           <div>
@@ -121,4 +124,4 @@ const mapStateToProps = state => {
 };
 
 
-export default connect(mapStateToProps)(Cell);
+export default connect(mapStateToProps, { addCell })(Cell);
