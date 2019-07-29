@@ -1,7 +1,7 @@
 import React from 'react';
 import './Cell.css';
 import { getRecipesState } from '../redux/selectors';
-import { addCell, removeCell, toggleField } from '../redux/actions';
+import { addCell, removeCell, toggleField, updateCell } from '../redux/actions';
 import { getWeek } from '../redux/selectors';
 import { connect } from 'react-redux';
 import _ from 'lodash';
@@ -36,17 +36,17 @@ class Cell extends React.Component {
   handleToggleEdit = (cellID, field) =>
     this.props.toggleField(cellID, field);
 
-  handleUpdateInput = e => {
+  handleUpdateInput = ( e, cellID ) => {
     const value = e.target.value;
     const field = e.target.name;
-  this.setState({[field]: value});
+    this.props.updateCell(cellID, field, value);
   }
   
-  handleEnterKey = (e) => {
+  handleEnterKey = (e, cellID) => {
     const keyCode = e.keyCode || e.which;
     const field = 'editable' + this.titleCase(e.target.name);
     if (keyCode === 13) {
-      this.setState({[field]: !this.state[field]});
+      this.props.toggleField(cellID, field);
     }
   }
 
@@ -71,15 +71,15 @@ class Cell extends React.Component {
               <h2
                 onClick={() => this.handleToggleEdit(cellID, 'editableDish')}
                  >
-                {'Dish: ' + this.state.dish}</h2> :
+                {'Dish: ' + this.props.week[cellID].dish}</h2> :
               <div><input
                      type='text'
                      name='dish'
-                     onKeyDown={this.handleEnterKey}
-                     onChange={e => this.handleUpdateInput(e)}
+                     onKeyDown={(e) => this.handleEnterKey(e, cellID)}
+                     onChange={e => this.handleUpdateInput(e, cellID)}
                      onBlur={this.handleBlur}
                      list='dishes'
-                     value={this.state.dish}
+                     value={this.props.week.dish}
                    autoFocus/>
                  <datalist id='dishes'>
                    {_.keys(this.props.recipes).map(recipe => (
@@ -90,16 +90,16 @@ class Cell extends React.Component {
           {this.props.week[cellID].editableServings === false ?
             <h2
               onClick={() => this.handleToggleEdit(cellID, 'editableServings')}
-            >{'Servings:' + this.state.servings}</h2>
+            >{'Servings:' + this.props.week[cellID].servings}</h2>
             :
             <input
               name='servings'
               type='number'
-              value={this.state.servings}
+              value={this.props.week[cellID].servings}
               min='1'
               step='1'
-              onKeyDown={this.handleEnterKey}
-              onChange={e => this.handleUpdateInput(e)}
+              onKeyDown={(e) => this.handleEnterKey(e, cellID)}
+              onChange={e => this.handleUpdateInput(e, cellID)}
               onFocus={e => e.target.select()}
               onBlur={this.handleBlur}
               autoFocus
@@ -129,4 +129,4 @@ const mapStateToProps = state => {
 };
 
 
-export default connect(mapStateToProps, { addCell, removeCell, toggleField })(Cell);
+export default connect(mapStateToProps, { addCell, removeCell, toggleField, updateCell })(Cell);

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { ADD_CELL, REMOVE_CELL, TOGGLE_FIELD } from '../actionTypes';
+import { ADD_CELL, REMOVE_CELL, TOGGLE_FIELD, UPDATE_CELL } from '../actionTypes';
 
 const initialState = {
 	 
@@ -15,7 +15,7 @@ export default function(state = initialState, action) {
 					editableDish: false,
 					dish: '',
 					editableServings: false,
-					servings: 0
+					servings: 1
 				} 
 			};
 		}
@@ -33,6 +33,14 @@ export default function(state = initialState, action) {
 				[cellID]: {...state[cellID],
 					[field]: !state[cellID][field]
 				}
+			};
+		}
+
+		case UPDATE_CELL: {
+			const { cellID, field, value } = action.payload;
+			return {...state,
+				[cellID]:{...state[cellID],
+					[field]: value}
 			};
 		}
 
