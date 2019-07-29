@@ -8,9 +8,15 @@ const initialState = {
 export default function(state = initialState, action) {
 	switch (action.type) {
     case ADD_CELL: {
-			const { cellID, v } = action.payload;
+			const { cellID } = action.payload;
       return {...state,
-				[cellID]: v 
+				[cellID]: {
+					editable: true,
+					editableDish: false,
+					dish: '',
+					editableServings: false,
+					servings: 0
+				} 
 			};
 		}
 			

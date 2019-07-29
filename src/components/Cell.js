@@ -2,6 +2,7 @@ import React from 'react';
 import './Cell.css';
 import { getRecipesState } from '../redux/selectors';
 import { addCell } from '../redux/actions';
+import { getWeek } from '../redux/selectors';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
@@ -56,14 +57,15 @@ class Cell extends React.Component {
 
   render () {
     const cellID = this.props.cellID;
+    
 		return(
       <div className='cell'>
-        {this.state.editable === false
+        {this.props.week[cellID] && this.props.week[cellID].editable === false
           ? 
           <p
             className='plus'
             onClick=
-              {() => this.props.addCell(cellID , "kaboom!") }
+              {() => this.props.addCell( cellID ) }
               /* {this.handleAddMeal} */
           >+</p>
           :
@@ -118,9 +120,12 @@ class Cell extends React.Component {
 	
 const mapStateToProps = state => {
   const recipes = getRecipesState(state);
+  const week = getWeek(state);
   return {
-    recipes};
-
+    recipes,
+    week
+  };
+  
 };
 
 

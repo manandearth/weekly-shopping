@@ -55,3 +55,7 @@ export const getProducts = store => {
 	return (
 		store.pantry.pantry);
 };
+
+export const getWeek = store => 
+		store.week;
+

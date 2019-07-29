@@ -82,11 +82,10 @@ export const addProduct = ( product, formats ) => ({
 });
 
 
-export const addCell = ( cellID, v ) => ({
+export const addCell = ( cellID ) => ({
 	type: ADD_CELL,
 	payload: {
-		cellID,
-		v }
+		cellID}
 });
 
 export const removeCell = ( cellID ) => ({
