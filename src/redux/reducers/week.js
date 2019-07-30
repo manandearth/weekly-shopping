@@ -5,6 +5,11 @@ const initialState = {
 	 
 };
 
+function renameKey (key) {
+	const splitKey = key.split('-');
+	return splitKey[0] + '-' + (splitKey[1]- 1);
+}
+
 export default function(state = initialState, action) {
 	switch (action.type) {
     case ADD_CELL: {
@@ -22,10 +27,20 @@ export default function(state = initialState, action) {
 			
 		case REMOVE_CELL: {
 			const { cellID } = action.payload;
+			const weekday = cellID.split('-')[0];
+			const column = _.keys(state).filter(key => key.split('-')[0] === weekday);
+			const biggerThanRemoved = column.filter(key => parseInt(key.split('-')[1]) > parseInt(cellID.split('-')[1]));
 			const newState = Object.assign({}, state);
 			delete newState[cellID];
-			return newState;
+			_.keys(newState).map(key => {
+				if (biggerThanRemoved.includes(key))  {
+					newState[renameKey(key)] = newState[key];
+					delete newState[key];}});
+		 
+			return {...newState
 			};
+			
+		}
 
 		case TOGGLE_FIELD: {
 			const { cellID, field } = action.payload;
@@ -45,5 +60,8 @@ export default function(state = initialState, action) {
 		}
 
 		default: return state;}
-
+	
 }
+	
+
+	
