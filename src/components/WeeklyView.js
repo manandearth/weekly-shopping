@@ -20,8 +20,10 @@ class WeeklyView extends React.Component {
   
 render(){
   const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const longestColumn = _.max(weekdays.map(weekday => this.mealsByDay(weekday).length));
 		return(
       <div>
+        <h1>{weekdays.map(weekday => this.mealsByDay(weekday))}</h1>
         <table>
           <thead>
             <tr className='top-bar'>{weekdays.map(day => 
@@ -40,7 +42,7 @@ render(){
                   </td>)
                 }</tr>
             {/* consecutive rows */}
-            {[2, 3, 4, 5].map(row =>
+            {_.range(2, _.max([2, longestColumn + 2]) + 1).map(row =>
               <tr className='weekly-view-cell'>
                 {weekdays.map(weekday =>
                   this.mealsByDay(weekday)
