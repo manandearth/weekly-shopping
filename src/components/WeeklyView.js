@@ -1,20 +1,25 @@
 import React from 'react';
 import Cell from './Cell';
+import { getWeek } from '../redux/selectors';
 import { connect } from 'react-redux';
+import _ from 'lodash';
+
+const EmptyCell = () =>
+      (<div >
+       </div>);
 
 class WeeklyView extends React.Component {
 
-  constructor (props){
-    super(props);
-    this.state = {
-      weeklyVector: []
-    };
+  // FIX -> find a way to look for day value as a predicate to return  all the day's entries or empty..
+  mealsByDay = ( weekday ) => {
+    
+    const entries= _.keys(this.props.week).filter( entry => (entry.startsWith(weekday)));
+    return entries;
+      
   }
-
-
+  
 render(){
-    const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-    const numberOfRows = 5; //TODO rethink how the number of meals in a day is to be decided
+  const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 		return(
       <div>
         <table>
@@ -24,16 +29,36 @@ render(){
             </tr>
           </thead>
           <tbody>
-            {[1, 2, 3, 4, 5].map(meal =>
-              <tr className='weekly-view-cell'>
+            {/* first row */}
+            <tr className='weekly-view-cell'>
                 {weekdays.map(cell =>
-                  (<td>
-                     <Cell
-                       cellID={cell + '-' + meal} 
-                       key={cell + '-' + meal}
-                     />
-                   </td>))}
+                  <td>
+                   <Cell
+                     cellID={cell + '-1'} 
+                     key={cell + '-1'}
+                   />
+                  </td>)
+                }</tr>
+            {/* consecutive rows */}
+            {[2, 3, 4, 5].map(row =>
+              <tr className='weekly-view-cell'>
+                {weekdays.map(weekday =>
+                  this.mealsByDay(weekday)
+                  && this.mealsByDay(weekday).length + 1 >= row
+                  ?
+                  <td>
+                   <Cell
+                     cellID={weekday + '-' + row} 
+                     key={weekday + '-' + row}
+                   />
+                     </td>
+                : 
+                     <td>
+                  <EmptyCell />
+                        </td>
+                )}
               </tr>)}
+            
           </tbody>
         </table>
 			</div>
@@ -41,4 +66,10 @@ render(){
 	}
 }
 
-export default WeeklyView;
+const mapToProps = ( state ) => {
+  return {
+    week: getWeek(state)
+  };
+}; 
+
+export default connect(mapToProps)(WeeklyView);

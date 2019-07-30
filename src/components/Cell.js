@@ -7,19 +7,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 
 class Cell extends React.Component {
-
-  constructor(props){
-    super(props);
-    this.state = {
-      editable: false,
-      editableDish: false,
-      dish:'',
-      editableServings: false,
-      servings: 0
-    };
-    
-  }
-
+ 
   //helper to capitalize the name property where necessary
   titleCase(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
