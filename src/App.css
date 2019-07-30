@@ -42,6 +42,8 @@
   }
 }
 
+.controls {
+    display: flex;}
 
 .recipes-panel {
     display: flex;

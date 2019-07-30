@@ -21,14 +21,21 @@ function App() {
         <ColorBtn />
         <h2 className='App-title'>Weekly shopping</h2>
       </header>
-      <div className='recipes-panel'>
-        <NewRecipe />
-        <RecipeList />
-        <EditRecipe />
-      </div>
+      
+      <div className='controls'>
+        <div>
+        <div className='recipes-panel'>
+          <NewRecipe />
+          <RecipeList />
+          <EditRecipe />
+        </div>
+       
+     
       <div className='ingredientsDB'>
         <WeeklyView />
-        <IngredientsDB />
+      </div>
+        </div>
+       <IngredientsDB />
       </div>
     </div>
     

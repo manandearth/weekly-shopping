@@ -23,7 +23,6 @@ render(){
   const longestColumn = _.max(weekdays.map(weekday => this.mealsByDay(weekday).length));
 		return(
       <div>
-        <h1>{weekdays.map(weekday => this.mealsByDay(weekday))}</h1>
         <table>
           <thead>
             <tr className='top-bar'>{weekdays.map(day => 
