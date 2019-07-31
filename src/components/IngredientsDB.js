@@ -1,6 +1,8 @@
 import React from 'react';
 import { getProducts } from '../redux/selectors';
 import { connect } from 'react-redux';
+import Controller from './Controller';
+import Select from './Select';
 import './IngredientsDB.css';
 import _ from 'lodash';
 
@@ -27,26 +29,40 @@ class IngredientsDB extends React.Component {
         <h2 className='ingredients-list-title'>Stored Ingredients:</h2>
         <li>
         {_.keys(products).map(
-          product => <p className='product'
+          product =>
+          
+          
+          <p className='product'
                         id={product}
-                        onMouseEnter={(e) => this.handleHover(e.target.id)}
-                        onMouseLeave={(e) => this.handleHover(e.target.id)}
-                       
+                        /* onMouseEnter={(e) => this.handleHover(e.target.id)} */
+                        /* onMouseLeave={(e) => this.handleHover(e.target.id)} */
+                        title={'Available formats: ' +
+                       products[product].map(fmt => fmt.qty + ' ' + fmt.unit + '. ')}
                      >{this.state[product] === true ?
             product +
             ', available formats: ' +
                        products[product].map(fmt => fmt.qty + ' ' + fmt.unit + '. ')
                        :
                        product       
-                     } </p>) 
+                     } </p>
+          
+          
+          
+) 
 
 }
-      </li>
+                    </li>
       </div>
     );
   }
 }
 
+const Tooltip = () =>
+      {return (<div>
+                 <p>yikes!</p></div>);
+      };
+
+      
 const mapStateToProps = state => {
   const products = getProducts(state);
   return {
