@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Controller from './Controller';
 import Select from './Select';
 import Tooltip from './Tooltip';
+import Product from './Product';
 import './IngredientsDB.css';
 import _ from 'lodash';
 
@@ -26,27 +27,27 @@ class IngredientsDB extends React.Component {
  
   render() {
     const products = this.props.products;
-    const yellowRoundedStyle = {
+    const whiteRoundedStyle = {
       wrapper: {
         flexAlign: 'row',
         display: 'inline-block',
         cursor: 'pointer'
       },
       content: {
-        backgroundColor: 'yellow',
+        backgroundColor: 'white',
         color: '#000',
         fontSize: '1.2rem',
-        lineHeight: '50%'
+        lineHeight: '150%'
       },
       tooltip: {
-        backgroundColor: 'yellow',
+        backgroundColor: 'white',
         borderRadius: '10px',
         bottom: '40%',
         left: '100%',
-        opacity: '50%'
+        opacity: '0.7'
       },
       arrow: {
-        borderTop: 'solid yellow 5px'
+        borderLeft: 'solid white 5px'
       }
     };
 
@@ -58,11 +59,12 @@ class IngredientsDB extends React.Component {
           product =>
             <Tooltip
               content={<div>
-                         <p>Available formats:</p>
-                         {products[product].map(fmt => (
-                           <p>{fmt.qty + ' ' + fmt.unit + '.'}</p>))}
+
+                         <Product
+                           product={product}
+                           fmts={products[product]}/>
                        </div>}
-              styles={yellowRoundedStyle}
+              styles={whiteRoundedStyle}
             >  <p className='product'
                   id={product}
                   title={'Available formats: ' + products[product].map(fmt => fmt.qty + ' ' + fmt.unit + '. ')}

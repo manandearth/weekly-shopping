@@ -53,7 +53,7 @@ export const getSelectedToEdit = store => {
 
 export const getProducts = store => {
 	return (
-		store.pantry.pantry);
+		store.pantry);
 };
 
 export const getWeek = store => 
