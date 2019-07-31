@@ -3,6 +3,7 @@ import { getProducts } from '../redux/selectors';
 import { connect } from 'react-redux';
 import Controller from './Controller';
 import Select from './Select';
+import Tooltip from './Tooltip';
 import './IngredientsDB.css';
 import _ from 'lodash';
 
@@ -22,45 +23,63 @@ class IngredientsDB extends React.Component {
     });
   };
 
+ 
   render() {
     const products = this.props.products;
+    const yellowRoundedStyle = {
+      wrapper: {
+        flexAlign: 'row',
+        display: 'inline-block',
+        cursor: 'pointer'
+      },
+      content: {
+        backgroundColor: 'yellow',
+        color: '#000',
+        fontSize: '1.2rem',
+        lineHeight: '50%'
+      },
+      tooltip: {
+        backgroundColor: 'yellow',
+        borderRadius: '10px',
+        bottom: '40%',
+        left: '100%',
+        opacity: '50%'
+      },
+      arrow: {
+        borderTop: 'solid yellow 5px'
+      }
+    };
+
     return (
       <div className='ingredients-head'>
         <h2 className='ingredients-list-title'>Stored Ingredients:</h2>
-        <li>
+        
         {_.keys(products).map(
           product =>
-          
-          
-          <p className='product'
-                        id={product}
-                        /* onMouseEnter={(e) => this.handleHover(e.target.id)} */
-                        /* onMouseLeave={(e) => this.handleHover(e.target.id)} */
-                        title={'Available formats: ' +
-                       products[product].map(fmt => fmt.qty + ' ' + fmt.unit + '. ')}
-                     >{this.state[product] === true ?
-            product +
-            ', available formats: ' +
-                       products[product].map(fmt => fmt.qty + ' ' + fmt.unit + '. ')
-                       :
-                       product       
-                     } </p>
+            <Tooltip
+              content={<div>
+                         <p>Available formats:</p>
+                         {products[product].map(fmt => (
+                           <p>{fmt.qty + ' ' + fmt.unit + '.'}</p>))}
+                       </div>}
+              styles={yellowRoundedStyle}
+            >  <p className='product'
+                  id={product}
+                  title={'Available formats: ' + products[product].map(fmt => fmt.qty + ' ' + fmt.unit + '. ')}
+               >{product}</p>
+            </Tooltip>
           
           
           
 ) 
 
 }
-                    </li>
+        
       </div>
     );
   }
 }
 
-const Tooltip = () =>
-      {return (<div>
-                 <p>yikes!</p></div>);
-      };
 
       
 const mapStateToProps = state => {

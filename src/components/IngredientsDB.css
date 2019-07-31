@@ -5,14 +5,19 @@
 
 .ingredients-head {
     background-color: floralwhite;
+    display: flex;
+    flex-direction: column;
 }
 
 .product {
     color: grey;
     font-size: 2rem;
-     cursor: pointer;
+    cursor: pointer;
 }
 
 .product:hover {
     color: black;
+}
+
+Tooltip {
 }
