@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { unitSet } from '../constants/shared';
 export default class RecipeIngredientsTable extends React.Component {
 	
   render(props) {
     const ingredients = this.props.ingredients;
-    const unitSet = ['kg', 'gr', 'ml', 'litre', 'tsp', 'tbsp', 'cup', 'lbs', 'oz', 'units' ];
 
     return(
       <div>

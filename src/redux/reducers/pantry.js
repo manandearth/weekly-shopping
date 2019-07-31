@@ -1,4 +1,4 @@
-import { ADD_PRODUCT } from '../actionTypes.js';
+import { ADD_PRODUCT, ADD_FORMAT } from '../actionTypes.js';
 
 const initialState = {
 	
@@ -18,6 +18,14 @@ export default function(state = initialState, action) {
 			return {
 				product,
 				formats
+			};
+		}
+		case ADD_FORMAT: {
+			const { product, qty, unit } = action.payload;
+			return{ ...state,
+				[product]: [...state[product],
+					{qty: qty, unit: unit}
+				]
 			};
 		}
 		default: return state;
