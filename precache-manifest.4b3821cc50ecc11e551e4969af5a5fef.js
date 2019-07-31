@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f44a6bc64dd7c1a44f6910f9f928f320",
+    "revision": "1dbdda3fc480a9dfe6dc9f4af01bc797",
     "url": "/weekly-shopping/index.html"
   },
   {
-    "revision": "33d55645fa6854db44dc",
-    "url": "/weekly-shopping/static/css/main.d0d963ca.chunk.css"
+    "revision": "3da2e445940de8832592",
+    "url": "/weekly-shopping/static/css/main.a4b9cd7a.chunk.css"
   },
   {
-    "revision": "f33fb68c0b654e12f941",
-    "url": "/weekly-shopping/static/js/2.52c2fd1c.chunk.js"
+    "revision": "f111fc17a6fd30ab5455",
+    "url": "/weekly-shopping/static/js/2.5440e3af.chunk.js"
   },
   {
-    "revision": "33d55645fa6854db44dc",
-    "url": "/weekly-shopping/static/js/main.5e198dae.chunk.js"
+    "revision": "3da2e445940de8832592",
+    "url": "/weekly-shopping/static/js/main.30054788.chunk.js"
   },
   {
     "revision": "3129f8e40db2010126de",
