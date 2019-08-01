@@ -1,7 +1,7 @@
 import React from 'react';
 import { getProducts } from '../redux/selectors';
 import { connect } from 'react-redux';
-import { addFormat, removeProduct } from '../redux/actions';
+import { addFormat, removeProduct, updateProductTitle } from '../redux/actions';
 import { unitSet } from '../constants/shared';
 import './Product.css';
 
@@ -10,11 +10,12 @@ class Product extends React.Component {
   constructor(props) {
     super(props);
     this.state = {qty: 0, unit: 'kg',
-      editable: false};
+      editable: false,
+      editableTitle: false};
     }
 
-  handleToggleEdit = () => {
-    this.setState({editable: !this.state.editable});
+  handleToggleEdit = (key) => {
+    this.setState({[key]: !this.state.editable});
   }
 
   handleUpdateInput = ( key, e ) => {
@@ -49,7 +50,7 @@ class Product extends React.Component {
         <p>Available formats:</p>
         {fmts.map(fmt => <li>{fmt.qty + ' ' + fmt.unit}</li>)}
       {!this.state.editable ?
-        <h3 onClick={this.handleToggleEdit}
+        <h3 onClick={() => this.handleToggleEdit('editable')}//the key to be toggled
         >Add Format</h3>
         :
         <div>
@@ -80,4 +81,4 @@ return {
   products};
 };
 
-export default connect(mapStateToProps, { addFormat, removeProduct })(Product);
+export default connect(mapStateToProps, { addFormat, removeProduct, updateProductTitle })(Product);
