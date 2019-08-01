@@ -9,10 +9,15 @@ class Product extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {qty: 0, unit: 'kg',
+    this.defaultState = {
+      productTitle: '',
+      qty: 0,
+      unit: 'kg',
       editable: false,
-      editableTitle: false};
-    }
+      editableProductTitle: false};
+
+    this.state = this.defaultState;
+  }
 
   handleToggleEdit = (key) => {
     this.setState({[key]: !this.state.editable});
@@ -23,6 +28,16 @@ class Product extends React.Component {
     this.setState({[key]: value});
   }
 
+  handleOnEnter = (e) => {
+    const product = this.props.product;
+    const keyCode = e.keyCode || e.which;
+    if (keyCode === 13) {
+      this.props.updateProductTitle( product, this.state.productTitle );
+      this.setState({editableProductTitle: !this.state.editableProductTitle});
+    }
+  }
+
+  
   handleSubmit = () => {
     const product = this.props.product;
     const qty = this.state.qty;
@@ -45,8 +60,14 @@ class Product extends React.Component {
       <div>
         <p className='remove-button'
               onClick= {this.handleRemoveProduct}
-          >X</p>
-        <h2 onClick={() => console.log(product)}>{product}</h2>
+        >X</p>
+        {!this.state.editableProductTitle ?
+        <h2 onClick={() => this.handleToggleEdit('editableProductTitle')} //the key to be toggled
+        >{product}</h2>
+          : <input
+              value={this.state.title}
+              onChange={e => this.handleUpdateInput('productTitle', e)}
+              onKeyDown={(e) => this.handleOnEnter(e)}></input>}
         <p>Available formats:</p>
         {fmts.map(fmt => <li>{fmt.qty + ' ' + fmt.unit}</li>)}
       {!this.state.editable ?

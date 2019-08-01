@@ -88,10 +88,11 @@ export const removeProduct = ( product ) => ({
 	}
 });
 
-export const updateProductTitle = ( product ) => ({
+export const updateProductTitle = ( product, newTitle ) => ({
 	type: UPDATE_PRODUCT_TITLE,
 	payload: {
-		product
+		product,
+		newTitle
 	}
 });
 

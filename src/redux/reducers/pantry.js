@@ -21,9 +21,12 @@ export default function(state = initialState, action) {
 		}
 			
 		case UPDATE_PRODUCT_TITLE: {
-			const { product } = action.payload;
-			return {
-				product };
+			const { product, newTitle } = action.payload;
+			state[newTitle] = state[product];
+			delete state[product];
+			return {...state
+				
+				 };
 		}
 
 		case ADD_FORMAT: {
