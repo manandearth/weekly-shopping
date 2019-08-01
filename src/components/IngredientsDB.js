@@ -67,7 +67,7 @@ class IngredientsDB extends React.Component {
               styles={whiteRoundedStyle}
             >  <p className='product'
                   id={product}
-                  title={'Available formats: ' + products[product].map(fmt => fmt.qty + ' ' + fmt.unit + '. ')}
+                  /* title={'Available formats: ' + products[product].map(fmt => fmt.qty + ' ' + fmt.unit + '. ')} */
                >{product}</p>
             </Tooltip>
           
