@@ -10,7 +10,7 @@ class Product extends React.Component {
   constructor(props) {
     super(props);
     this.defaultState = {
-      productTitle: '',
+      productTitle: this.props.product,
       qty: 0,
       unit: 'kg',
       editable: false,
@@ -65,11 +65,16 @@ class Product extends React.Component {
         <h2 onClick={() => this.handleToggleEdit('editableProductTitle')} //the key to be toggled
         >{product}</h2>
           : <input
-              value={this.state.title}
+              value={this.state.productTitle}
               onChange={e => this.handleUpdateInput('productTitle', e)}
-              onKeyDown={(e) => this.handleOnEnter(e)}></input>}
+              onKeyDown={(e) => this.handleOnEnter(e)}
+            autoFocus></input>}
         <p>Available formats:</p>
-        {fmts.map(fmt => <li>{fmt.qty + ' ' + fmt.unit}</li>)}
+        {fmts.map(fmt =>
+          <div className='format-div'>
+            <li>{fmt.qty + ' ' + fmt.unit}</li>
+            <p>x</p>
+          </div>)}
       {!this.state.editable ?
         <h3 onClick={() => this.handleToggleEdit('editable')}//the key to be toggled
         >Add Format</h3>

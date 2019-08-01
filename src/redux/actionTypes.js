@@ -12,6 +12,7 @@ export const ADD_INGREDIENT = "ADD_INGREDIENT";
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 export const ADD_FORMAT = "ADD_FORMAT";
+export const REMOVE_FORMAT = "REMOVE_FORMAT";
 export const ADD_CELL = "ADD_CELL";
 export const REMOVE_CELL = "REMOVE_CELL";
 export const TOGGLE_FIELD = "TOGGLE_FIELD";

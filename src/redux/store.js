@@ -9,7 +9,7 @@ const persistConfig = {
  key: 'root',
  storage: storage,
 	stateReconciler: autoMergeLevel2 // see "Merge Process" section for details.
-	,  blacklist: ['week'] // -> look in doc.org
+	,  blacklist: ['week', 'pantry'] // -> look in doc.org
 };
 
 const pReducer = persistReducer(persistConfig, rootReducer);

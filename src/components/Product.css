@@ -11,6 +11,31 @@
     font-size: 1.1rem;
     font-weight: bold;
     text-shadow: 1px 1px 3px  red;
-    
-    
+}
+
+.format-div {
+    display: flex;
+    flex-direction: row;
+}
+
+/* the following aligns the name to the left and the `x` to the right */
+
+.format-div li {
+    text-align: left;
+    width: 90%;
+}
+
+.format-div p{
+    text-align: right;
+    width: 10%;
+    /* padding: 0px; */
+    margin: 0px;
+}
+
+.format-div p:hover{
+    color: red;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px  red;
+
 }
