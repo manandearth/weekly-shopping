@@ -5,6 +5,7 @@ import Controller from './Controller';
 import Select from './Select';
 import Tooltip from './Tooltip';
 import Product from './Product';
+import AddProduct from './AddProduct';
 import './IngredientsDB.css';
 import _ from 'lodash';
 
@@ -54,7 +55,7 @@ class IngredientsDB extends React.Component {
     return (
       <div className='ingredients-head'>
         <h2 className='ingredients-list-title'>Stored Ingredients:</h2>
-        
+        <AddProduct />
         {_.keys(products).map(
           product =>
             <Tooltip
