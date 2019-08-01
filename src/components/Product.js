@@ -1,8 +1,10 @@
 import React from 'react';
 import { getProducts } from '../redux/selectors';
 import { connect } from 'react-redux';
-import { addFormat } from '../redux/actions';
+import { addFormat, removeProduct } from '../redux/actions';
 import { unitSet } from '../constants/shared';
+import './Product.css';
+
 class Product extends React.Component {
 
   constructor(props) {
@@ -28,11 +30,21 @@ class Product extends React.Component {
     this.setState({editable: !this.state.editable});
   };
 
+  handleRemoveProduct = () => {
+    const conf = window.confirm('this will remove the product from the inventory. go a head?');
+    return (conf ?
+      this.props.removeProduct(this.props.product) :
+      null);
+  }
+  
   render() {
     const product = this.props.product;
     const fmts = this.props.fmts;
 		return (
       <div>
+        <p className='remove-button'
+              onClick= {this.handleRemoveProduct}
+          >X</p>
         <h2 onClick={() => console.log(product)}>{product}</h2>
         <p>Available formats:</p>
         {fmts.map(fmt => <li>{fmt.qty + ' ' + fmt.unit}</li>)}
@@ -68,4 +80,4 @@ return {
   products};
 };
 
-export default connect(mapStateToProps, { addFormat })(Product);
+export default connect(mapStateToProps, { addFormat, removeProduct })(Product);

@@ -1,4 +1,4 @@
-import { ADD_RECIPE, SELECT_RECIPE, TOGGLE_TITLE, TOGGLE_SERVINGS, UPDATE_TITLE, UPDATE_SERVINGS, EDIT_RECIPE, TOGGLE_TABLE, UPDATE_TABLE, RESET_EDIT, ADD_INGREDIENT, ADD_PRODUCT, ADD_FORMAT, ADD_CELL, REMOVE_CELL, TOGGLE_FIELD, UPDATE_CELL } from './actionTypes';
+import { ADD_RECIPE, SELECT_RECIPE, TOGGLE_TITLE, TOGGLE_SERVINGS, UPDATE_TITLE, UPDATE_SERVINGS, EDIT_RECIPE, TOGGLE_TABLE, UPDATE_TABLE, RESET_EDIT, ADD_INGREDIENT, ADD_PRODUCT, REMOVE_PRODUCT, ADD_FORMAT, ADD_CELL, REMOVE_CELL, TOGGLE_FIELD, UPDATE_CELL } from './actionTypes';
 
 // let nextRecipeId = 1;
 
@@ -78,6 +78,13 @@ export const addProduct = ( product, formats ) => ({
 	payload: {
 		product,
 		formats
+	}
+});
+
+export const removeProduct = ( product ) => ({
+	type: REMOVE_PRODUCT,
+	payload: {
+		product
 	}
 });
 

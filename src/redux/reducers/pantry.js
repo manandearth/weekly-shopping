@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, ADD_FORMAT } from '../actionTypes.js';
+import { ADD_PRODUCT, ADD_FORMAT, REMOVE_PRODUCT } from '../actionTypes.js';
 
 const initialState = {
 	
@@ -27,6 +27,12 @@ export default function(state = initialState, action) {
 					{qty: qty, unit: unit}
 				]
 			};
+		}
+		case REMOVE_PRODUCT: {
+			const { product } = action.payload;
+			const newState = Object.assign({}, state);
+			delete newState[product];
+			return newState;
 		}
 		default: return state;
 	}
