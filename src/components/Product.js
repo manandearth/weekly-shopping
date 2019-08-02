@@ -32,7 +32,9 @@ class Product extends React.Component {
     const product = this.props.product;
     const keyCode = e.keyCode || e.which;
     if (keyCode === 13) {
-      this.props.updateProductTitle( product, this.state.productTitle );
+      //check that productTitle changed since `updateProductTitle` deletes the original product.
+      if (product !== this.state.productTitle) {
+        this.props.updateProductTitle( product, this.state.productTitle );}
       this.setState({editableProductTitle: !this.state.editableProductTitle});
     }
   }
