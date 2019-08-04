@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { unitSet } from '../constants/shared';
-export default class RecipeIngredientsTable extends React.Component {
+import { getProducts } from '../redux/selectors';
+import { connect } from 'react-redux';
+import _ from 'lodash';
+
+class RecipeIngredientsTable extends React.Component {
 	
   render(props) {
     const ingredients = this.props.ingredients;
@@ -25,15 +29,20 @@ export default class RecipeIngredientsTable extends React.Component {
               <tr key={'ingredient-row-' + k}>
                 {ingredients[k].editable === 'name' ?
                   <td><input
-                    className='name'
-                    id={k}
-                    value={ingredients[k].name}
-                    onChange={e => this.props.onTableChange(e)}
-                    onKeyDown={this.props.onTableEnterKey}
-                    onBlur={this.props.onTableBlur}
-                    onFocus={e => e.target.select()}
-                    autoFocus
-                  ></input></td> :
+                        className='name'
+                        id={k}
+                        list='pantry'
+                        value={ingredients[k].name}
+                        onChange={e => this.props.onTableChange(e)}
+                        onKeyDown={this.props.onTableEnterKey}
+                        onBlur={this.props.onTableBlur}
+                        onFocus={e => e.target.select()}
+                        autoFocus />
+                    <datalist id='pantry'>
+                      {_.keys(this.props.pantry).map(
+                        product => <option>{product}</option>)}
+                    </datalist>
+                 </td> :
                   <td
                     id={k}
                     className='name'
@@ -92,3 +101,12 @@ RecipeIngredientsTable.propTypes = {
   name: PropTypes.string
   
 };
+
+const mapToProps = state => {
+  const pantry = getProducts(state);
+  return {
+pantry
+  };
+};
+
+export default connect(mapToProps)(RecipeIngredientsTable);
