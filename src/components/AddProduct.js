@@ -48,7 +48,8 @@ class AddProduct extends React.Component {
              >{'<add a product>'}</h2> :
              <div className='add-product-box'
                //closes the box when clicking outside:
-             onBlur={this.handleEdit}> 
+                  // onBlur={this.handleEdit}
+             > 
                <h2>adding a product</h2>
                {this.state.editableTitle ?
                  <div>
