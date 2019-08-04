@@ -7,21 +7,23 @@ class AddProduct extends React.Component {
 
 	constructor(props){
 		super(props);
-		this.state = {
+		this.defaultState = {
       editable: false,
       editableTitle: true,
 			title: '',
-			formats: []
+			qty: 0,
+      unit: 'kg'
 		};
+    this.state = this.defaultState;
 	}
 
   handleEdit = () => {
     this.setState({editable: !this.state.editable});
   }
 
-  handleUpdateTitle = (e) => {
+  handleUpdate = (key, e) => {
     const value = e.target.value;
-    this.setState({title: value});
+    this.setState({[key]: value});
 
   }
 
@@ -34,7 +36,10 @@ class AddProduct extends React.Component {
     if (keyCode === 13) {
       this.setState({editableTitle: !this.state.editableTitle});
     }}
-  
+
+  handleSubmit = () => {
+    this.props.addProduct(this.state.title, [{qty: this.state.qty, unit: this.state.unit}]);
+    this.setState = this.defaultState;}
   
 	render(){
   return(<div>
@@ -48,21 +53,29 @@ class AddProduct extends React.Component {
                  <label>product name</label>
                    <input
                      value={this.state.title}
-                     onChange={(e) => this.handleUpdateTitle(e)}
+                     onChange={(e) => this.handleUpdate('title', e)}
                      onKeyDown={(e) =>this.handleTitleEnterKey(e)}
                  ></input>
                  </div>
                  :
                  <div><h2 onClick={this.handleToggle}>{this.state.title}</h2></div>}
                <div>
-               <label>format:</label><input type='number' min={0}></input>
-             <select>{unitSet.map(unit => <option>{unit}</option> )}</select>
+                 <label>format:</label>
+                 <input type='number'
+                        min={0}
+                        onChange={(e) => this.handleUpdate('qty', e)}></input>
+                 <select
+                   onChange={(e) => this.handleUpdate('unit' ,e)}
+                 >{unitSet.map(unit => <option>{unit}</option> )}</select>
                </div>
-               <button className='button'>Submit</button>
+               <button
+                 className='button'
+                 onClick={this.handleSubmit}
+               >Submit</button>
              </div>}
          </div>);
 	};
 }
 
-
 export default connect(null, { addProduct })(AddProduct);
+

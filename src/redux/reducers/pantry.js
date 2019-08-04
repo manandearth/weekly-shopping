@@ -15,9 +15,8 @@ export default function(state = initialState, action) {
 	switch (action.type) {
 		case ADD_PRODUCT: {
 			const { product, formats } = action.payload;
-			return {
-				product,
-				formats };
+			return {...state, 
+				[product]: formats };
 		}
 			
 		case REMOVE_PRODUCT: {
