@@ -7,7 +7,8 @@ state already has the qty as string and must be int.
 the recipes added come with editable property is it required?
 
 
-* TODO reset on submit recipe 
+
+* DONE reset on submit recipe 
 Look at onSubmitReset - still isn't working.
 running two handles on that listener.
 
@@ -18,6 +19,7 @@ running two handles on that listener.
 I am trying this with a parsing namespace under `/utilities`
 
 ** errors
+
 One idea is a wrapper handler that catches any error and renders some component/error message
 
 

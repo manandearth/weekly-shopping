@@ -28,7 +28,7 @@
 }
 
 .App-title {
-    color: orange;
+    color: 	#FFFACD;
     padding-left: 2vmin;
 }
 
@@ -58,7 +58,7 @@
 
 .top-bar {
     color: white;
-    background-color: orange;
+    background-color: wheat;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
 

@@ -24,7 +24,6 @@ class AddProduct extends React.Component {
   handleUpdate = (key, e) => {
     const value = e.target.value;
     this.setState({[key]: value});
-
   }
 
   handleToggle = () => {
@@ -46,8 +45,10 @@ class AddProduct extends React.Component {
   return(<div>
            {!this.state.editable ?
              <h2 onClick={this.handleEdit}
-             >add a product</h2> :
-             <div className='add-product-box'>
+             >{'<add a product>'}</h2> :
+             <div className='add-product-box'
+               //closes the box when clicking outside:
+             onBlur={this.handleEdit}> 
                <h2>adding a product</h2>
                {this.state.editableTitle ?
                  <div>

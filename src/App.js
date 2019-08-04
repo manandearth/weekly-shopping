@@ -17,8 +17,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <ColorBtn />
+        {/* <img src={logo} className="App-logo" alt="logo" /> */}
+        {/* <ColorBtn /> */}
         <h2 className='App-title'>Weekly shopping</h2>
       </header>
       
