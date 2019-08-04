@@ -39,7 +39,8 @@ class AddProduct extends React.Component {
 
   handleSubmit = () => {
     this.props.addProduct(this.state.title, [{qty: this.state.qty, unit: this.state.unit}]);
-    this.setState = this.defaultState;}
+    this.setState(this.defaultState);
+  }
   
 	render(){
   return(<div>
