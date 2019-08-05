@@ -43,11 +43,13 @@ export default function(state = initialState, action) {
 				]};
 		}
 
+			//FIX -> doesn't seem to work...
 		case REMOVE_FORMAT: {
-			const { product, id } = action.playload;
-			const newState = Object.assign({}, state);
-			delete newState[product][id];
-			return {...newState};
+			const { product, id } = action.payload;
+			return {...state,
+				[product]: state[product].filter(i => (state[product].indexOf(i) !== id))
+				
+			};
 		}
 
 		default: return state;
