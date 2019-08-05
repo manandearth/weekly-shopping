@@ -4,3 +4,8 @@
     border-radius: 10px;
     
 }
+
+.cancel-button {
+    text-decoration: underline;
+    cursor: pointer;
+}

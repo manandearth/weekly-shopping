@@ -44,7 +44,8 @@ class AddProduct extends React.Component {
 	render(){
   return(<div>
            {!this.state.editable ?
-             <h2 onClick={this.handleEdit}
+             <h2 className='button'
+                 onClick={this.handleEdit}
              >{'<add a product>'}</h2> :
              <div className='add-product-box'
                //closes the box when clicking outside:
@@ -75,6 +76,8 @@ class AddProduct extends React.Component {
                  className='button'
                  onClick={this.handleSubmit}
                >Submit</button>
+               <p className='cancel-button'
+                  onClick={this.handleEdit}>cancel</p>
              </div>}
          </div>);
 	};
