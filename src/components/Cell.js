@@ -1,8 +1,7 @@
 import React from 'react';
 import './Cell.css';
-import { getRecipesState } from '../redux/selectors';
+import { getRecipes, getWeek } from '../redux/selectors';
 import { addCell, removeCell, toggleField, updateCell } from '../redux/actions';
-import { getWeek } from '../redux/selectors';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
@@ -107,7 +106,7 @@ class Cell extends React.Component {
 }
 	
 const mapStateToProps = state => {
-  const recipes = getRecipesState(state);
+  const recipes = getRecipes(state);
   const week = getWeek(state);
   return {
     recipes,

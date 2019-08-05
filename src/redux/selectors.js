@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { editRecipeTitlePH } from '../constants/placeholders';
 
-export const getRecipesState = store => store.recipes;
+export const getRecipes = store => store.recipes;
 
 export const getEdited = store =>
 	store.editedRecipe.recipe ?
@@ -14,7 +14,7 @@ export const getSelectedRecipe = store =>
 	editRecipeTitlePH;
 
 export const getSelectedFromRecipes = store => {
-	const recipes = getRecipesState(store);
+	const recipes = getRecipes(store);
 	const selectedRecipeTitle = getSelectedRecipe(store);
 	return _.values(recipes).filter(recipe => (recipe.title === selectedRecipeTitle));
 };
@@ -36,7 +36,7 @@ export const getSelectedIngredients = store => {
 export const getSelectedEditableServings = store => {
 	return( 
 		store.selections.selectedRecipe.recipe && store.recipes ?
-			_.values(getSelectedFromRecipes(store))[0].editableServings :
+			_.values(getSelectedFromRecipes(store))[0].editablservings :
 			'' );};
 
 export const getSelectedEditableTitle = store => {
@@ -58,4 +58,12 @@ export const getProducts = store => {
 
 export const getWeek = store => 
 		store.week;
+
+export const getWeekArray = store => 
+	_.keys(getWeek(store)).map(key =>  (
+		[store.week[key].dish,
+		store.week[key].servings
+	])
+	);
+	
 

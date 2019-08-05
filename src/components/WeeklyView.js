@@ -1,5 +1,6 @@
 import React from 'react';
 import Cell from './Cell';
+import ShoppingList from './ShoppingList';
 import { getWeek } from '../redux/selectors';
 import { connect } from 'react-redux';
 import _ from 'lodash';
@@ -62,6 +63,7 @@ render(){
             
           </tbody>
         </table>
+        <ShoppingList />
 			</div>
     );
 	}
