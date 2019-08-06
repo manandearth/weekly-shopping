@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { unitSet } from '../constants/shared';
+import { units } from '../constants/shared';
 import { getProducts } from '../redux/selectors';
 import { connect } from 'react-redux';
 import _ from 'lodash';
@@ -79,7 +79,7 @@ class RecipeIngredientsTable extends React.Component {
                     id={k}
                     onChange={this.props.onTableChange}
                     onBlur={this.props.onTableBlur}>
-                    {unitSet.map((u) => (<option key={'unit-list-item-' + u} >{u}</option>))}
+                    {units.map((u) => (<option key={'unit-list-item-' + u} >{u}</option>))}
                   </select>
                   :
                   <span

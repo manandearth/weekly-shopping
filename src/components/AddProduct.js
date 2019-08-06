@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addProduct } from '../redux/actions';
-import { unitSet } from '../constants/shared';
+import { units } from '../constants/shared';
 import './AddProduct.css';
 class AddProduct extends React.Component {
 
@@ -70,7 +70,7 @@ class AddProduct extends React.Component {
                         onChange={(e) => this.handleUpdate('qty', e)}></input>
                  <select
                    onChange={(e) => this.handleUpdate('unit' ,e)}
-                 >{unitSet.map(unit => <option>{unit}</option> )}</select>
+                 >{units.map(unit => <option>{unit}</option> )}</select>
                </div>
                <button
                  className='button'

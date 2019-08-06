@@ -2,7 +2,7 @@ import React from 'react';
 import { getProducts } from '../redux/selectors';
 import { connect } from 'react-redux';
 import { addFormat, removeProduct, updateProductTitle, removeFormat } from '../redux/actions';
-import { unitSet } from '../constants/shared';
+import { units } from '../constants/shared';
 import './Product.css';
 
 class Product extends React.Component {
@@ -94,7 +94,7 @@ class Product extends React.Component {
           <select
             value={this.state.unit}
             onChange={e => this.handleUpdateInput('unit', e)}>
-          {unitSet.map((u) => (<option key={'unit-list-item-' + u} >{u}</option>))}
+          {units.map((u) => (<option key={'unit-list-item-' + u} >{u}</option>))}
           </select>
           <button
             className='button'

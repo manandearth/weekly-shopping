@@ -49,7 +49,7 @@ const initialState = {
 				unit: 'ml',
 				editable: null},
 			3: {
-				name: 'butter',
+				name: 'salted butter',
 				qty: 50,
 				unit: 'gr',
 				editable: null},
