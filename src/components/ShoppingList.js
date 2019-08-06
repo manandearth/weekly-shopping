@@ -11,7 +11,15 @@ const CalcDishes = (props) => {
 
   const allMeals = (weekArray && weekArray !== undefined) ?
         weekArray.map( ([dish, servings])  =>
-          dish + servings )
+          recipes[dish] ? _.keys(recipes[dish].ingredients).map(
+            ingredient =>
+              (<p>{
+                recipes[dish].ingredients[ingredient].name + ' ' +
+                  recipes[dish].ingredients[ingredient].qty *
+                  (servings /
+                    recipes[dish].servings) + ' ' +
+                  recipes[dish].ingredients[ingredient].unit
+              }</p>)) : dish)
         : "nothing here...";
             
   // const allIngredients = allMeals ?
@@ -20,7 +28,7 @@ const CalcDishes = (props) => {
   //   recipes[meal.dish].ingredients
   //         : null) : null;
   
-  return (<div>{weekArray}</div>);
+  return (<div>{allMeals}</div>);
 };
 
 
