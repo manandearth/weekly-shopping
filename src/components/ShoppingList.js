@@ -1,35 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getWeekArray, getProducts, getRecipes, getWeek } from '../redux/selectors';
-import { units } from '../constants/shared';
+import { units, unitsMap } from '../constants/shared';
+import { weightToGramms, volumeToMl } from '../utilities/unitConversion';
 import _ from 'lodash';
 
-
-//MEASUREMENT HELPER FUNCTIONS:
-const convertKgGr = (qty) => qty * 1000;
-const convertKgLb = (qty) => qty * 0.4535924;
-const convertKgOz = (qty) => qty * 0.02834952;
-
-const convertGrKg = (qty) => qty / 1000;
-const convertGrLb = (qty) => qty * 0.002204623;
-const convertGrOz = (qty) => qty * 28.34952;
-
-const convertLitreMl = (qty) => qty * 1000;
-const convertMlLitre = (qty) => qty / 1000;
-
-const convertTsbpGr = (qty) => qty * 12.78;
-
-const convertTspGr = (qty) => qty * 4.92;
-
-const convertLbKg = (qty) => qty * 2.204623;
-const convertLbGr = (qty) => qty * 2204.623;
-const covertLbOz = (qty) => qty * 0.0625;
-
-const convertOzKg = (qty) => qty * 35.27396;
-const convertOzLb = (qty) => qty * 16;
-const convertOzGr = (qty) => qty * 0.03527396;
-
-      
 const CalcDishes = (props) => {
   const weekArray = props.weekArray;
   const products = props.products;
@@ -37,45 +12,19 @@ const CalcDishes = (props) => {
   const week = props.week;
 
   const unitConverter = (name, qty, unit) => {
-    if (unit === products[name][0].unit) //just testing...
-    {return ([name, qty, unit]);}
-    switch (unit) {
-      case 'kg': {
-        switch (products[name].unit) {
-          case 'gr': {
-            const newQty = convertKgGr(qty);
-            return([name, newQty, 'gr']);
-          }
-          case 'oz': {
-            const newQty = convertKgOz(qty);
-            return([name, newQty, 'oz']);
-          }
-          case 'lb': {
-            const newQty = convertKgLb(qty);
-            return([name, newQty, 'lb']);
-          } 
-          default: return([name, qty, unit]);
-        }
-      }
-      case 'gr': {
-        switch (products[name].unit) {
-          case 'kg': {
-            const newQty = convertGrKg(qty);
-            return([name, newQty, 'kg']);
-          }
-          case 'oz': {
-            const newQty = convertGrOz(qty);
-            return ([name, newQty, 'oz']);
-          }
-          case 'lb': {
-            const newQty = convertGrLb(qty);
-            return([name, newQty, 'lb']);
-          }
-          default: return([name, qty, unit]);
-        }
-      }
+    if (unitsMap.weight[unit]) {
+      const newQty = weightToGramms(qty);
+      return([name, newQty, 'gr']);
+    }
+    else if (unitsMap.volume[unit]) {
+      const newQty = weightToGramms(qty);
+      return([name, newQty, 'ml']);
+    }
+    else if (unitsMap.units[unit]) {
+      return ([name, qty, unit]);
+    }
+    else return null;
   };
-  }
   
   const allMeals = (weekArray && weekArray !== undefined) ?
         weekArray.map( ([dish, servings])  =>

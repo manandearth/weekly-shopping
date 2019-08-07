@@ -15,7 +15,7 @@ export const unitsMap = {
 		'ml',
 		'pint',
 		'oz - liquid',
-		'tbsp-liquid',
+		'tbsp - liquid',
 		'tsp - liquid',
 		'cup - liquid',
 	],
