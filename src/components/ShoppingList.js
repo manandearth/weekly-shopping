@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getWeekArray, getProducts, getRecipes, getWeek } from '../redux/selectors';
-import { units, unitsMap } from '../constants/shared';
+import { unitsMap, unit } from '../constants/shared';
 import { weightToGramms, volumeToMl } from '../utilities/unitConversion';
 import _ from 'lodash';
 
@@ -12,18 +12,18 @@ const CalcDishes = (props) => {
   const week = props.week;
 
   const unitConverter = (name, qty, unit) => {
-    if (unitsMap.weight[unit]) {
-      const newQty = weightToGramms(qty);
+    if (unitsMap.weight.includes(unit)) {
+      const newQty = weightToGramms(qty, unit);
       return([name, newQty, 'gr']);
     }
-    else if (unitsMap.volume[unit]) {
-      const newQty = weightToGramms(qty);
+    else if (unitsMap.volume.includes(unit)) {
+      const newQty = volumeToMl(qty, unit);
       return([name, newQty, 'ml']);
     }
-    else if (unitsMap.units[unit]) {
+    else if (unitsMap.units.includes(unit)) {
       return ([name, qty, unit]);
     }
-    else return null;
+    else return (['something\'s gone', null, 'oops']);
   };
   
   const allMeals = (weekArray && weekArray !== undefined) ?

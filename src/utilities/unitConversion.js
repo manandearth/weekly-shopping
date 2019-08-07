@@ -56,7 +56,7 @@ export const weightToGramms = (qty, unit) => {
 	}
 };
 
-const volumeToMl = (qty, unit) => {
+export const volumeToMl = (qty, unit) => {
 	switch(unit) {
 		case 'ml': {
 			return(qty);
