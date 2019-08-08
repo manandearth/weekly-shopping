@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/weekly-shopping/static/css/main.8ee02604.chunk.css",
-    "main.js": "/weekly-shopping/static/js/main.c69c7186.chunk.js",
-    "main.js.map": "/weekly-shopping/static/js/main.c69c7186.chunk.js.map",
+    "main.js": "/weekly-shopping/static/js/main.6ea1373d.chunk.js",
+    "main.js.map": "/weekly-shopping/static/js/main.6ea1373d.chunk.js.map",
     "runtime~main.js": "/weekly-shopping/static/js/runtime~main.e6f136e2.js",
     "runtime~main.js.map": "/weekly-shopping/static/js/runtime~main.e6f136e2.js.map",
-    "static/js/2.a4abb286.chunk.js": "/weekly-shopping/static/js/2.a4abb286.chunk.js",
-    "static/js/2.a4abb286.chunk.js.map": "/weekly-shopping/static/js/2.a4abb286.chunk.js.map",
+    "static/js/2.0d6e3216.chunk.js": "/weekly-shopping/static/js/2.0d6e3216.chunk.js",
+    "static/js/2.0d6e3216.chunk.js.map": "/weekly-shopping/static/js/2.0d6e3216.chunk.js.map",
     "index.html": "/weekly-shopping/index.html",
-    "precache-manifest.5c2b13e9c5acc2c3d84783098313dd54.js": "/weekly-shopping/precache-manifest.5c2b13e9c5acc2c3d84783098313dd54.js",
+    "precache-manifest.014eae035665175f8e7ea396af509210.js": "/weekly-shopping/precache-manifest.014eae035665175f8e7ea396af509210.js",
     "service-worker.js": "/weekly-shopping/service-worker.js",
     "static/css/main.8ee02604.chunk.css.map": "/weekly-shopping/static/css/main.8ee02604.chunk.css.map",
     "static/media/logo.svg": "/weekly-shopping/static/media/logo.5d5d9eef.svg"
