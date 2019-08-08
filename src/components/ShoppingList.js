@@ -14,16 +14,16 @@ const CalcDishes = (props) => {
   const unitConverter = (name, qty, unit) => {
     if (unitsMap.weight.includes(unit)) {
       const newQty = weightToGramms(qty, unit);
-      return([name, newQty, 'gr']);
+      return({name: name, qty: newQty, unit: 'gr'});
     }
     else if (unitsMap.volume.includes(unit)) {
       const newQty = volumeToMl(qty, unit);
-      return([name, newQty, 'ml']);
+      return({name: name, qty: newQty, unit:'ml'});
     }
     else if (unitsMap.units.includes(unit)) {
-      return ([name, qty, unit]);
+      return ({name: name, qty: qty,unit: unit});
     }
-    else return (['something\'s gone', null, 'oops']);
+    else return ({name: name, qty: qty, unit: unit});
   };
   
   const allMeals = (weekArray && weekArray !== undefined) ?
@@ -46,15 +46,53 @@ const CalcDishes = (props) => {
         allMeals.map(ingredients => _.isArray(ingredients) ? //isArray means it was a dish recognised in store/recipes (AllMeals)
           ingredients.map(([name, qty, unit]) =>
             unitConverter(name, qty, unit)   
-            )  : '#' + ingredients + '#')
+          )  : '#' + ingredients + '#')
         : null;
+
+  const combinedLodash =
+        (_.isArray(converted) && _.isObject(converted[0])) ?
+         _(converted.flat()
+         ).groupBy('name').map((objs, key) =>
+           ({name: key, qty: _.sumBy(objs, 'qty')})).value()
+        :
+    null;
+
+  const combined = 
+        (_.isArray(converted)  && _.isObject(converted[0]))
+        ?
+        converted.flat()
+        .reduce((a, c) => {
+          (a[c.name] || (a[c.name] = [c.unit]))
+            .push(c.qty);
+          return a;
+        }
+          , [])
+    :
+    null;
+
+  const summed =
+        (_.isArray(converted)  && _.isObject(converted[0]))
+        ?
+         _.keys(combined).map(product =>
+          { const [unit, ...rest] = combined[product];
+            const summedValues = rest.reduce((a, c) => a + c, 0);
+            return( {[product]: summedValues });})
+          :
+          null;
+
+
   
+  const handleConversion = () => console.log(summed);
+   
   return (<div>
-            <h2>The total of ingredients is:</h2>
-            <div>{allMeals}</div>
-            <h2>Which translates to:</h2>
-            <div>{converted}</div>
-          </div>);
+              <h2>The total of ingredients is:</h2>
+              <div>{allMeals}</div>
+              <h2>Which translates to:</h2>
+              {/* <div>{converted}</div> */}
+            <h2> now combining:</h2>
+            <div><h1 onClick={handleConversion}>click to try</h1>
+              <h3>{'a'}</h3></div>
+            </div>);
 };
 
 
