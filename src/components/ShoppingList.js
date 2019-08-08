@@ -76,23 +76,44 @@ const CalcDishes = (props) => {
          _.keys(combined).map(product =>
           { const [unit, ...rest] = combined[product];
             const summedValues = rest.reduce((a, c) => a + c, 0);
-            return( {[product]: summedValues });})
+            return( [product, unit, summedValues] );})
           :
           null;
 
 
+  const SummedTable = () => 
+        (_.isArray(converted)  && _.isObject(converted[0]))
+        ?
+        
+        <div>
+          <table>
+            <tbody>
+              <tr><td>product</td><td>qty</td><td>unit</td></tr>
+              {_.keys(summed).map(i =>
+                <tr>
+                  <td>{summed[i][0]}</td>
+                  <td>{summed[i][2]}</td>
+                  <td>{summed[i][1]}</td>
+                </tr>)}
+  </tbody></table>
+        </div>
+        :
+        <h1>oops</h1>;
+        
   
+        
   const handleConversion = () => console.log(summed);
-   
+  
   return (<div>
-              <h2>The total of ingredients is:</h2>
-              <div>{allMeals}</div>
-              <h2>Which translates to:</h2>
-              {/* <div>{converted}</div> */}
+            <h2>The total of ingredients is:</h2>
+            <div>{allMeals}</div>
+            <h2>Which translates to:</h2>
+            {/* <div>{converted}</div> */}
             <h2> now combining:</h2>
             <div><h1 onClick={handleConversion}>click to try</h1>
-              <h3>{'a'}</h3></div>
-            </div>);
+            </div>
+            <SummedTable />
+          </div>);
 };
 
 
